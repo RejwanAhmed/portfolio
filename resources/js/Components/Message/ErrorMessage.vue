@@ -1,6 +1,6 @@
 <template>
     <div v-if="errorMessage">
-        <p class="text-danger mt-1">
+        <p class="text-sm text-red-600 mt-1">
             {{ errorMessage }}
         </p>
     </div>

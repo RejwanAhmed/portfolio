@@ -29,56 +29,52 @@ const submit = () => {
 </script>
 
 <template>
-    <section class="vh-100" style="background-color: #f0f2f5;">
-        <div class="container h-100">
-            <div class="row d-flex justify-content-center align-items-center h-100">
-                <div class="col-md-8 col-lg-6 col-xl-5">
-                    <!-- Card for login form -->
-                    <div class="card shadow-lg" style="border-radius: 1rem;">
-                        <div class="card-body p-5">
-                            <h3 class="text-center mb-4 font-weight-bold">Welcome Back <b><i>Rejwan</i></b></h3>
-                            <hr>
-                            <p class="text-center mb-4">Please sign in to your account</p>
+    <section class="h-screen bg-gray-100">
+    <div class="container mx-auto flex h-full justify-center items-center">
+        <div class="w-full max-w-md">
+            <!-- Card for login form -->
+            <div class="bg-white shadow-lg rounded-lg p-8">
+                <h3 class="text-center mb-4 text-2xl font-bold">Welcome Back <b><i>Rejwan</i></b></h3>
+                <hr class="mb-4">
+                <p class="text-center mb-4 text-gray-600">Please sign in to your account</p>
 
-                            <VForm @submit="submit">
-                                <!-- Email input -->
-                                 <div class="form-outlint mb-4">
-                                    <div class="input-group">
-                                        <span class="input-group-text" id="basic-addon1">
-                                            <i class="bi bi-envelope-fill"></i>
-                                        </span>
-                                        <Field type="email" class="form-control form-control-lg" placeholder="Enter your email" name="email" v-model="formData.email" required />
-                                    </div>
-                                    <ErrorMessage :errorMessage="formData.errors.email"/>
-                                 </div>
-
-                                <!-- Password input -->
-                                <div class="form-outline mb-4">
-                                    <div class="input-group">
-                                        <span class="input-group-text" id="password-addon">
-                                            <i :class="isPasswordVisible ? 'bi bi-eye-slash' : 'bi bi-eye'" @click="togglePasswordVisibility" style="cursor: pointer;"></i>
-                                        </span>
-                                        <Field :type ="isPasswordVisible ? 'text' : 'password'" class="form-control form-control-lg" placeholder="Enter your password" name="password" v-model="formData.password" required />
-                                    </div>
-                                    
-                                    <ErrorMessage :errorMessage="formData.errors.password"/>
-                                </div>
-
-                                <div class="d-flex justify-content-between align-items-center mb-4">
-                                    <div>
-                                        <Field type="checkbox" name="remember" v-model="formData.remember" />
-                                        <label class="form-check-label ms-2">Remember me</label>
-                                    </div>
-                                    <a href="#!" class="text-primary">Forgot password?</a>
-                                </div>
-
-                                <!-- Submit Button -->
-                                <button class="form-control btn btn-primary btn-lg btn-block" type="submit">Login</button>
-                            </VForm>
+                <VForm @submit="submit">
+                    <!-- Email input -->
+                    <div class="mb-4">
+                        <div class="flex items-center border rounded-md p-2 bg-gray-50">
+                            <span class="text-gray-500">
+                                <i class="bi bi-envelope-fill"></i>
+                            </span>
+                            <Field type="email" class="flex-1 ml-2 p-2 border-none focus:outline-none" placeholder="Enter your email" name="email" v-model="formData.email" required />
                         </div>
+                        <ErrorMessage :errorMessage="formData.errors.email"/>
                     </div>
-                </div>
+
+                    <!-- Password input -->
+                    <div class="mb-4">
+                        <div class="flex items-center border rounded-md p-2 bg-gray-50">
+                            <span class="text-gray-500">
+                                <i :class="isPasswordVisible ? 'bi bi-eye-slash' : 'bi bi-eye'" @click="togglePasswordVisibility" style="cursor: pointer;"></i>
+                            </span>
+                            <Field :type ="isPasswordVisible ? 'text' : 'password'" class="flex-1 ml-2 p-2 border-none focus:outline-none" placeholder="Enter your password" name="password" v-model="formData.password" required />
+                        </div>
+                        <ErrorMessage :errorMessage="formData.errors.password"/>
+                    </div>
+
+                    <div class="flex justify-between items-center mb-4">
+                        <div class="flex items-center">
+                            <Field type="checkbox" name="remember" v-model="formData.remember" />
+                            <label class="ml-2 text-gray-600">Remember me</label>
+                        </div>
+                        <a href="#!" class="text-blue-500 hover:underline">Forgot password?</a>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 rounded-lg focus:outline-none focus:ring focus:ring-blue-300" type="submit">Login</button>
+                </VForm>
             </div>
         </div>
-    </section>
+    </div>
+</section>
+
 </template>
