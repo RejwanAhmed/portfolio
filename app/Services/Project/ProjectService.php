@@ -11,4 +11,9 @@ class ProjectService extends BaseModelService
     {
         return Project::class;
     }
+
+    public function createProject($validatedData)
+    {
+        return $this->create($validatedData);
+    }
 }

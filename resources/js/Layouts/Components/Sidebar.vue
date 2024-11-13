@@ -18,7 +18,9 @@
       <div class="h-full flex flex-col px-3 py-4 overflow-y-auto bg-gray-800 dark:bg-gray-800">
          <div class="flex flex-col justify-center items-center mb-5">
             <img class="rounded-full w-20 h-20" src="/assets/images/rejwan.jpg" alt="image description">
-            <h2 class="mt-3 text-gray-50 dark:text-gray hover:text-black hover:bg-gray-100 dark:hover:bg-gray-700 text-2xl">Welcome Rejwan</h2>
+            <h2
+               class="mt-3 text-gray-50 dark:text-gray hover:text-black hover:bg-gray-100 dark:hover:bg-gray-700 text-2xl">
+               Welcome Rejwan</h2>
          </div>
 
          <ul class="space-y-2 font-medium">
@@ -48,6 +50,21 @@
                      clip-rule="evenodd" />
                </svg>
                <span class="flex-1 ms-3 whitespace-nowrap">Profile</span>
+               </Link>
+            </li>
+
+            <li>
+               <Link :href="route('projects.index')"
+                  class="flex items-center p-2 text-gray-50 rounded-lg dark:text-gray hover:text-black hover:bg-gray-100 dark:hover:bg-gray-700 group">
+               <svg
+                  class="w-6 h-6 text-gray-50 transition duration-75 dark:text-gray-700 group-hover:text-gray-900 dark:group-hover:text-white"
+                  aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                  viewBox="0 0 24 24">
+                  <path fill-rule="evenodd"
+                     d="M5 3a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11.5c.07 0 .14-.007.207-.021.095.014.193.021.293.021h2a2 2 0 0 0 2-2V7a1 1 0 0 0-1-1h-1a1 1 0 1 0 0 2v11h-2V5a2 2 0 0 0-2-2H5Zm7 4a1 1 0 0 1 1-1h.5a1 1 0 1 1 0 2H13a1 1 0 0 1-1-1Zm0 3a1 1 0 0 1 1-1h.5a1 1 0 1 1 0 2H13a1 1 0 0 1-1-1Zm-6 4a1 1 0 0 1 1-1h6a1 1 0 1 1 0 2H7a1 1 0 0 1-1-1Zm0 3a1 1 0 0 1 1-1h6a1 1 0 1 1 0 2H7a1 1 0 0 1-1-1ZM7 6a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1H7Zm1 3V8h1v1H8Z"
+                     clip-rule="evenodd" />
+               </svg>
+               <span class="flex-1 ms-3 whitespace-nowrap">Project</span>
                </Link>
             </li>
          </ul>

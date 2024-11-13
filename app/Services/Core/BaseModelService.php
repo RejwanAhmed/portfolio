@@ -30,7 +30,7 @@ abstract class BaseModelService
 
     public function delete($primaryKey)
     {
-        return $this->model()::delete($primaryKey);
+        return $this->model()::destroy($primaryKey);
     }
 
     public function create(array $validatedData)
