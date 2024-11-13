@@ -20,5 +20,10 @@ export default {
         },
     },
 
-    plugins: [forms, flowbite],
+    plugins: [
+        forms, 
+        flowbite({
+            datatables: true,
+        })
+    ],
 };
