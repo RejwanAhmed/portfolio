@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Project;
 use App\Constants\Constants;
 use App\Http\Requests\Project\UpdateProjectRequest;
 use App\Models\Project\Project;
+use Diglactic\Breadcrumbs\Breadcrumbs;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -23,9 +24,11 @@ class ProjectController extends Controller
 
     public function index()
     {
+        $breadcrumbs = Breadcrumbs::generate('projects');
         $projects = $this->projectService->all();
         $responseData = [
             'projects' => $projects,
+            'breadcrumbs' => $breadcrumbs,
             'pageTitle' => 'Project List',
         ];
         return Inertia::render('Project/Index', $responseData);
@@ -33,7 +36,9 @@ class ProjectController extends Controller
 
     public function create()
     {
+        $breadcrumbs = Breadcrumbs::generate('addProject');
         $responseData = [
+            'breadcrumbs' => $breadcrumbs,
             'pageTitle' => 'Add Project',
         ];
         return Inertia::render('Project/Create', $responseData);
@@ -50,8 +55,10 @@ class ProjectController extends Controller
 
     public function edit(Project $project)
     {
+        $breadcrumbs = Breadcrumbs::generate('editProject', $project);
         $responseData = [
             'project' => $project,
+            'breadcrumbs' => $breadcrumbs,
             'pageTitle' => 'Edit Project'
         ];
         return Inertia::render('Project/Create', $responseData);
