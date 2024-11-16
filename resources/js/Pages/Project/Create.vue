@@ -1,5 +1,5 @@
 <template>
-    <AuthenticatedLayout :pageTitle="props?.pageTitle">
+    <AuthenticatedLayout :pageTitle="props?.pageTitle" :breadcrumbs="breadcrumbs">
         <!-- Content Section -->
         <div class=" mx-auto p-6 bg-white shadow-md rounded-lg space-y-6">
             <VForm @submit="submit" class="space-y-6">
@@ -55,15 +55,17 @@
     </AuthenticatedLayout>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, useForm } from '@inertiajs/vue3';
 import { Field, Form as VForm } from "vee-validate";
 import SubmitButton from '@/Components/Button/SubmitButton.vue';
 import ErrorMessage from '@/Components/Message/ErrorMessage.vue';
+import { BreadcrumbInterface } from '@/Core/helpers/Interfaces';
 const props = defineProps({
     project: Object,
-    pageTitle: String
+    pageTitle: String,
+    breadcrumbs: Array as () => BreadcrumbInterface[]
 })
 
 const formData = useForm({
