@@ -31,10 +31,15 @@
                             <td>{{ project?.end_date }}</td>
                             <td>{{ project?.github_url }}</td>
                             <td>{{ project?.live_link_url }}</td>
-                            <td class = "space-x-2">
+                            <td class = "flex items-center space-x-2">
                                 <EditButton :obj="project" redirectionRoute="projects.edit"/>
                                 
                                 <DeleteConfirmationButton :obj="project" confirmRoute="projects.destroy"/>
+                                
+                                <ImageUploadModal 
+                                    :projectId = "project.id"
+                                    :projectName = "project.name"
+                                />
                             </td>
                         </tr>
                     </tbody>
@@ -53,6 +58,7 @@ import DeleteConfirmationButton from '@/Components/Button/DeleteConfirmationButt
 import EditButton from '@/Components/Button/EditButton.vue';
 import ColumnName from '@/Components/Table/ColumnName.vue';
 import { BreadcrumbInterface } from '@/Core/helpers/Interfaces';
+import ImageUploadModal  from '@/Pages/Project/ImageUploadModal.vue';
 
 const props = defineProps({
     projects: Object as() => IProject[] | undefined,
