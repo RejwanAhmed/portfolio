@@ -4,7 +4,11 @@
         "paths": {
             "@/*": ["resources/js/*"],
             "ziggy-js": ["./vendor/tightenco/ziggy"]
-        }
+        },
+        "target": "ES2015",
+        "lib": ["ES2015", "DOM"],
+        "module": "ESNext",
+        "moduleResolution": "Node"
     },
     "exclude": ["node_modules", "public"]
 }

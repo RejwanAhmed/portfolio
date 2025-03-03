@@ -1,11 +1,12 @@
 <?php
 
+use Inertia\Inertia;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Application;
+use App\Http\Controllers\SkillController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Project\ProjectController;
-use App\Http\Controllers\SkillController;
-use Illuminate\Foundation\Application;
-use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
+use App\Http\Controllers\Project\ProjectImageController;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -25,8 +26,14 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::resource('/projects', ProjectController::class);
-    Route::resource('/skills', SkillController::class);
+    Route::resource('/projects', ProjectController::Class);
+    Route::resource('/skills', SkillController::Class);
+    
+    Route::prefix('project-images')->name('project.images.')->group(function () {
+        Route::get('/{project}', [ProjectImageController::class, 'index'])->name('index');
+        Route::post('/{project}', [ProjectImageController::class, 'store'])->name('store');
+        Route::delete('/{projectImage}', [ProjectImageController::class, 'destroy'])->name('destroy');
+    });
 });
 
 require __DIR__.'/auth.php';
