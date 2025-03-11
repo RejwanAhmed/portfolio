@@ -14,6 +14,28 @@ class ProjectService extends BaseModelService
 
     public function createProject($validatedData)
     {
-        return $this->create($validatedData);
+        $project = $this->create($validatedData);
+        if (!empty($validatedData['skills'])) {
+            $this->syncSkills($project, $validatedData['skills']);
+        }
+        return $project;
+    }
+
+    public function updateProject(Project $project, $validatedData)
+    {
+        $this->update($project, $validatedData);
+        $this->syncSkills($project, $validatedData['skills']);
+        return $project;
+    }
+
+    public function getProjectDetails(Project $project)
+    {
+        return $project->load('skills');
+    }
+
+    public function syncSkills(Project $project, $skills)
+    {
+        $skillIds = collect($skills)->pluck('id')->toArray();
+        return $project->skills()->sync($skillIds);
     }
 }

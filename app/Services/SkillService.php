@@ -4,7 +4,6 @@ namespace App\Services;
 
 use App\Models\Skill;
 use App\Services\Core\BaseModelService;
-use Illuminate\Support\Facades\File;
 use App\Services\Core\HelperService;
 
 class SkillService extends BaseModelService
@@ -30,8 +29,17 @@ class SkillService extends BaseModelService
 
     public function deleteSkill(Skill $skill)
     {
+        if ($this->hasReferences($skill)) {
+            return false; 
+        }
         HelperService::deleteImage($skill->image_url);
+        return $this->delete($skill->id);  
+    }
 
-        return $this->delete($skill->id);
+    public function hasReferences(Skill $skill)
+    {
+        if ($skill->projects()->exists()) {
+            return true;
+        }
     }
 }

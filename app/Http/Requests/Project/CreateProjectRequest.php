@@ -28,6 +28,7 @@ class CreateProjectRequest extends FormRequest
             'end_date' => 'required|date|after:start_date',
             'github_url' => 'nullable|url|max:255',
             'live_link_url' => 'nullable|url|max:255',
+            'skills' => 'nullable|array'
         ];
     }
 
@@ -54,6 +55,8 @@ class CreateProjectRequest extends FormRequest
 
             'live_link_url.url' => 'Live Link URL must be a valid URL.',
             'live_link_url.max' => 'Live Link URL may not exceed 255 characters.',
+
+            'skills.array' => 'Skills must be in array format'
         ];
     }
 }
