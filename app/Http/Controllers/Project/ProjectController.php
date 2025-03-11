@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Project;
 use App\Constants\Constants;
 use App\Http\Requests\Project\UpdateProjectRequest;
 use App\Models\Project\Project;
+use App\Services\SkillService;
 use Diglactic\Breadcrumbs\Breadcrumbs;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
@@ -16,10 +17,12 @@ use App\Http\Requests\Project\CreateProjectRequest;
 class ProjectController extends Controller
 {
     protected ProjectService $projectService;
+    protected SkillService $skillService;
 
-    public function __construct(ProjectService $projectService)
+    public function __construct(ProjectService $projectService, SkillService $skillService)
     {
         $this->projectService = $projectService;
+        $this->skillService = $skillService;
     }
 
     public function index()
@@ -37,8 +40,10 @@ class ProjectController extends Controller
     public function create()
     {
         $breadcrumbs = Breadcrumbs::generate('addProject');
+        $skills = $this->skillService->all();
         $responseData = [
             'breadcrumbs' => $breadcrumbs,
+            'activeSkills' => $skills,
             'pageTitle' => 'Add Project',
         ];
         return Inertia::render('Project/Create', $responseData);
@@ -56,8 +61,11 @@ class ProjectController extends Controller
     public function edit(Project $project)
     {
         $breadcrumbs = Breadcrumbs::generate('editProject', $project);
+        $project = $this->projectService->getProjectDetails($project);
+        $skills = $this->skillService->all();
         $responseData = [
             'project' => $project,
+            'activeSkills' => $skills,
             'breadcrumbs' => $breadcrumbs,
             'pageTitle' => 'Edit Project'
         ];
@@ -67,7 +75,7 @@ class ProjectController extends Controller
     public function update(UpdateProjectRequest $request, Project $project)
     {
         $validatedData = $request->validated();
-        $isUpdated = $this->projectService->update($project, $validatedData);
+        $isUpdated = $this->projectService->updateProject($project, $validatedData);
         $status = $isUpdated ? Constants::SUCCESS : Constants::ERROR;
         $message = $isUpdated ? 'Project Updated Successfully' : 'Project Could Not Be Updated';
         return Redirect::route('projects.index')->with($status, $message);

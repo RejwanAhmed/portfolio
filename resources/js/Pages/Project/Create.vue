@@ -49,6 +49,20 @@
                         <ErrorMessage :errorMessage="formData.errors.live_link_url"/>
                     </div>
                 </div>
+
+                <!-- Skill Field -->
+                <div>
+                    <label for="skills" class="block text-sm font-medium text-gray-700">Select Skills</label>
+                    <Multiselect
+                        v-model="formData.skills"
+                        :multiple="true"
+                        :options="allSkills"
+                        label="name"
+                        track-by="name"
+                    >
+                    </Multiselect>
+                    <ErrorMessage :errorMessage="formData.errors.skills"/>
+                </div>
                 <SubmitButton />
             </VForm>
         </div>
@@ -62,11 +76,20 @@ import { Field, Form as VForm } from "vee-validate";
 import SubmitButton from '@/Components/Button/SubmitButton.vue';
 import ErrorMessage from '@/Components/Message/ErrorMessage.vue';
 import { BreadcrumbInterface } from '@/Core/helpers/Interfaces';
+import Multiselect from 'vue-multiselect';
+import { ref } from 'vue';
+
 const props = defineProps({
     project: Object,
     pageTitle: String,
+    activeSkills: Object,
     breadcrumbs: Array as () => BreadcrumbInterface[]
 })
+
+const allSkills = ref<Array<any>>([]);
+if (Array.isArray(props.activeSkills) && props.activeSkills.length > 0) {
+    allSkills.value = props.activeSkills.map(skill => ({id: skill.id, name:skill.name}));
+}
 
 const formData = useForm({
     name: props.project?.name || '',
@@ -74,7 +97,9 @@ const formData = useForm({
     start_date: props.project?.start_date || '',
     end_date: props.project?.end_date || '',
     github_url: props.project?.github_url || '',
-    live_link_url: props.project?.live_link_url || ''
+    live_link_url: props.project?.live_link_url || '',
+    skills: props.project?.skills ? allSkills.value.filter(skill => props.project?.skills.some((s: any) => s.id === skill.id)) : []
+
 })
 
 const submit = () => {
@@ -90,3 +115,4 @@ const submit = () => {
     
 }
 </script>
+<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
