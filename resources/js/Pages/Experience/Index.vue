@@ -30,7 +30,6 @@
                             <td>{{ experience?.job_title }}</td>
                             <td>{{ experience?.start_date }}</td>
                             <td>{{ experience?.end_date }}</td>
-                            <td>{{ experience?.description }}</td>
                             <td class = "space-x-2">
                                 <EditButton :obj="experience" redirectionRoute="experiences.edit"/>
                                 <DeleteConfirmationButton :obj="experience" confirmRoute="experiences.destroy"/>
@@ -72,7 +71,6 @@ const columnNames = [
     'job title',
     'start date',
     'end date',
-    'description'
 ]
 
 interface IExperience {
@@ -81,6 +79,5 @@ interface IExperience {
     job_title: string,
     start_date: string,
     end_date: string,
-    description: string
 }
 </script>

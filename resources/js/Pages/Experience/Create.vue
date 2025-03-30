@@ -38,8 +38,7 @@
                 <!-- Description Field -->
                 <div>
                     <label for="description" class="block text-sm font-medium text-gray-700">Description <span class="text-red-500">*</span></label>
-                    <textarea id="description" v-model="formData.description" rows="4" required class="mt-1 block w-full p-3 border border-gray-300 rounded-md focus:ring focus:ring-indigo-200 transition ease-in-out duration-200" placeholder="Describe your experience">
-                    </textarea>
+                    <QuillEditor  v-model:content="formData.description" contentType="html" theme="snow" toolbar="essential" />
                     <ErrorMessage :errorMessage="formData.errors.description"/>
                 </div>
                 <SubmitButton />
@@ -55,7 +54,9 @@ import { Field, Form as VForm } from "vee-validate";
 import SubmitButton from '@/Components/Button/SubmitButton.vue';
 import ErrorMessage from '@/Components/Message/ErrorMessage.vue';
 import { BreadcrumbInterface } from '@/Core/helpers/Interfaces';
-import { ref } from 'vue';
+import { QuillEditor } from '@vueup/vue-quill'
+import '@vueup/vue-quill/dist/vue-quill.snow.css';
+import '@vueup/vue-quill/dist/vue-quill.bubble.css';
 
 const props = defineProps({
     experience: Object,
@@ -69,7 +70,6 @@ const formData = useForm({
     start_date: props.experience?.start_date || '',
     end_date: props.experience?.end_date || '',
     description: props.experience?.description || '',
-
 })
 
 const submit = () => {
