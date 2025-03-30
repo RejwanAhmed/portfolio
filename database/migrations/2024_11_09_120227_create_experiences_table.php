@@ -16,8 +16,9 @@ return new class extends Migration
             $table->string('company_name');
             $table->string('job_title');
             $table->date('start_date');
-            $table->date('end_date');
+            $table->date('end_date')->nullable();
             $table->string('description');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
