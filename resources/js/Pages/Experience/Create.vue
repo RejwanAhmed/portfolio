@@ -41,9 +41,6 @@
                     <QuillEditor  v-model:content="formData.description" contentType="html" theme="snow" toolbar="essential" />
                     <ErrorMessage :errorMessage="formData.errors.description"/>
                 </div>
-
-                <div>
-                </div>
                 <SubmitButton />
             </VForm>
         </div>
