@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ExperienceController;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
@@ -34,6 +35,8 @@ Route::middleware('auth')->group(function () {
         Route::post('/{project}', [ProjectImageController::class, 'store'])->name('store');
         Route::delete('/{projectImage}', [ProjectImageController::class, 'destroy'])->name('destroy');
     });
+
+    Route::resource('/experiences', ExperienceController::class);
 });
 
 require __DIR__.'/auth.php';

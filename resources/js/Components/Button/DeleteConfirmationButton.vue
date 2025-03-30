@@ -22,9 +22,9 @@ const showDeleteConfirmation = async () => {
         },
         buttonsStyling: false
     })
-
+    const name = props.obj?.name ? props.obj?.name : props.obj?.company_name
     const result = await swalWithBootstrapButtons.fire({
-        title: `Are you sure want to delete ${props.obj?.name}?`,
+        title: `Are you sure want to delete ${name}?`,
         icon: 'warning',
         showCancelButton: true,
         confirmButtonText: `<span class="text-white">Confirm</span>`,

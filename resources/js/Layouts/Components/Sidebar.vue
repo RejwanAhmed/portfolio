@@ -77,6 +77,15 @@
                   <span class="flex-1 ms-3 whitespace-nowrap">Skill</span>
                </Link>
             </li>
+
+            <li>
+               <Link :href="route('experiences.index')" class="flex items-center p-2 text-gray-50 rounded-lg dark:text-gray hover:text-black hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                  <svg class="w-6 h-6 text-gray-50 transition duration-75 dark:text-gray-700 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                     <path fill-rule="evenodd" d="M8 4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h3V4Zm2 2h4V4h-4v2ZM4 10v10h16V10H4Zm10 3h-4v2h4v-2Z" clip-rule="evenodd"/>
+                  </svg>
+                  <span class="flex-1 ms-3 whitespace-nowrap">Experience</span>
+               </Link>
+            </li>
          </ul>
 
          <ul class="mt-auto space-y-2 font-medium">

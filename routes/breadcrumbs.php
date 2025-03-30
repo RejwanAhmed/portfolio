@@ -2,6 +2,7 @@
 
 // Note: Laravel will automatically resolve `Breadcrumbs::` without
 // this import. This is nice for IDE syntax and refactoring.
+use App\Models\Experience;
 use App\Models\Project\Project;
 use App\Models\Skill;
 use Diglactic\Breadcrumbs\Breadcrumbs;
@@ -61,5 +62,29 @@ Breadcrumbs::for('addSkill', function (BreadcrumbTrail $trail) {
 Breadcrumbs::for('editSkill', function (BreadcrumbTrail $trail, Skill $skill) {
     $trail->parent('skill');
     $trail->push('Edit', route('skills.edit', $skill));
+});
+
+// Home > Experince
+Breadcrumbs::for('experience', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push('Experience', route('experiences.index'));
+});
+
+// Home > Experince > Experinces
+Breadcrumbs::for('experiences', function (BreadcrumbTrail $trail) {
+    $trail->parent('experience');
+    $trail->push('List', route('experiences.index'));
+});
+
+// Home > Experince > Add
+Breadcrumbs::for('addExperience', function (BreadcrumbTrail $trail) {
+    $trail->parent('experience');
+    $trail->push('Add', route('experiences.create'));
+});
+
+// Home > Experince > Edit
+Breadcrumbs::for('editExperience', function (BreadcrumbTrail $trail, Experience $experience) {
+    $trail->parent('experience');
+    $trail->push('Edit', route('experiences.edit', $experience));
 });
 
