@@ -1,9 +1,34 @@
-<script setup>
+<template>
+    <AuthenticatedLayout :pageTitle="pageTitle" :breadcrumbs="breadcrumbs">
+        <div class="py-12">
+            <div class="mx-auto max-w-7xl">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-white p-4 shadow sm:rounded-lg sm:p-8">
+                        <UpdateProfileInformationForm
+                            :must-verify-email="mustVerifyEmail"
+                            :status="status"
+                            class="w-full"
+                        />
+                    </div>
+
+                    <div class="bg-white p-4 shadow sm:rounded-lg sm:p-8">
+                        <UpdatePasswordForm class="w-full" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <ProfileOtherInformation :user="user"></ProfileOtherInformation>
+
+    </AuthenticatedLayout>
+</template>
+
+<script setup lang="ts">
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import DeleteUserForm from './Partials/DeleteUserForm.vue';
 import UpdatePasswordForm from './Partials/UpdatePasswordForm.vue';
 import UpdateProfileInformationForm from './Partials/UpdateProfileInformationForm.vue';
-import { Head } from '@inertiajs/vue3';
+import ProfileOtherInformation from './Partials/ProfileOtherInformation.vue';
+import { BreadcrumbInterface } from '@/Core/helpers/Interfaces';
 
 defineProps({
     mustVerifyEmail: {
@@ -12,45 +37,8 @@ defineProps({
     status: {
         type: String,
     },
+    user: Object,
+    pageTitle: String,
+    breadcrumbs: Array as () => BreadcrumbInterface[],
 });
 </script>
-
-<template>
-    <Head title="Profile" />
-
-    <AuthenticatedLayout>
-        <template #header>
-            <h2
-                class="text-xl font-semibold leading-tight text-gray-800"
-            >
-                Profile
-            </h2>
-        </template>
-
-        <div class="py-12">
-            <div class="mx-auto max-w-7xl space-y-6 sm:px-6 lg:px-8">
-                <div
-                    class="bg-white p-4 shadow sm:rounded-lg sm:p-8"
-                >
-                    <UpdateProfileInformationForm
-                        :must-verify-email="mustVerifyEmail"
-                        :status="status"
-                        class="max-w-xl"
-                    />
-                </div>
-
-                <div
-                    class="bg-white p-4 shadow sm:rounded-lg sm:p-8"
-                >
-                    <UpdatePasswordForm class="max-w-xl" />
-                </div>
-
-                <div
-                    class="bg-white p-4 shadow sm:rounded-lg sm:p-8"
-                >
-                    <DeleteUserForm class="max-w-xl" />
-                </div>
-            </div>
-        </div>
-    </AuthenticatedLayout>
-</template>

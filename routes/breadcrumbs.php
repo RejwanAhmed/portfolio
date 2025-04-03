@@ -17,6 +17,12 @@ Breadcrumbs::for('dashboard', function (BreadcrumbTrail $trail) {
     $trail->push('Home', route('dashboard'));
 });
 
+// Home > Profile
+Breadcrumbs::for('profile', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push('Profile', route('profile.edit'));
+});
+
 // Home > Project
 Breadcrumbs::for('project', function (BreadcrumbTrail $trail) {
     $trail->parent('dashboard');
