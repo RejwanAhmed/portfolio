@@ -13,9 +13,11 @@ return new class extends Migration
     {
         Schema::create('education', function (Blueprint $table) {
             $table->id();
+            $table->integer('serial_no');
             $table->string('title');
             $table->string('institution');
-            $table->string('board')->nullable();
+            $table->string('logo');
+            $table->string('board')->nullable();    
             $table->string('result');
             $table->year('start_year');
             $table->year('end_year');
