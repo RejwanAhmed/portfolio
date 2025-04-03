@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EducationController;
 use App\Http\Controllers\ExperienceController;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
@@ -37,6 +38,7 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::resource('/experiences', ExperienceController::class);
+    Route::resource('/educations', EducationController::class);
 });
 
 require __DIR__.'/auth.php';

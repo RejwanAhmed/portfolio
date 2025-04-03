@@ -22,7 +22,7 @@ const showDeleteConfirmation = async () => {
         },
         buttonsStyling: false
     })
-    const name = props.obj?.name ? props.obj?.name : props.obj?.company_name
+    const name = props.obj?.name ? props.obj?.name : (props.obj?.company_name ?? props.obj?.title);
     const result = await swalWithBootstrapButtons.fire({
         title: `Are you sure want to delete ${name}?`,
         icon: 'warning',

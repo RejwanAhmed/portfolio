@@ -86,6 +86,17 @@
                   <span class="flex-1 ms-3 whitespace-nowrap">Experience</span>
                </Link>
             </li>
+
+            <li>
+               <Link :href="route('educations.index')" class="flex items-center p-2 text-gray-50 rounded-lg dark:text-gray hover:text-black hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                  <svg class="w-6 h-6 text-gray-50 transition duration-75 dark:text-gray-700 group-hover:text-gray-900 dark:group-hover:text-white" 
+                     aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
+                     fill="currentColor" viewBox="0 0 24 24">
+                     <path d="M12 2 1 7l11 5 9-4v6h2V7zm7 16h2v-4h-2zm-2-2H7v2h10zm-5-2.5-8-3.5V14l8 4 8-4v-3.5l-8 3.5z"/>
+                  </svg>
+                  <span class="flex-1 ms-3 whitespace-nowrap">Education</span>
+               </Link>
+            </li>
          </ul>
 
          <ul class="mt-auto space-y-2 font-medium">
