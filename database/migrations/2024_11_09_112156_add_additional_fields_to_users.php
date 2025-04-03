@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('linked_in_url')->nullable()->after('address');
             $table->string('github_url')->nullable()->after('linked_in_url');
             $table->string('landing_image_url')->nullable()->after('github_url');
-            $table->string('about_us_image_url')->nullable()->after('landing_image_url');
+            $table->string('about_me_image_url')->nullable()->after('landing_image_url');
         });
     }
 
@@ -36,7 +36,7 @@ return new class extends Migration
             $table->dropColumn('linked_in_url');
             $table->dropColumn('github_url');
             $table->dropColumn('landing_image_url');
-            $table->dropColumn('about_us_image_url');
+            $table->dropColumn('about_me_image_url');
         });
     }
 };

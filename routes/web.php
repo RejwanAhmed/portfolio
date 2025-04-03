@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CvController;
 use App\Http\Controllers\EducationController;
 use App\Http\Controllers\ExperienceController;
 use Inertia\Inertia;
@@ -26,7 +27,7 @@ Route::get('/dashboard', function () {
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::patch('/profile/other-information/{user}', [ProfileController::class, 'updateOtherInformation'])->name('profile.otherInformation');
 
     Route::resource('/projects', ProjectController::Class);
     Route::resource('/skills', SkillController::Class);

@@ -4,6 +4,9 @@ import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import { Link, useForm, usePage } from '@inertiajs/vue3';
+import SubmitButton from '@/Components/Button/SubmitButton.vue';
+import toastr from 'toastr';
+import 'toastr/toastr.scss';
 
 defineProps({
     mustVerifyEmail: {
@@ -26,16 +29,16 @@ const form = useForm({
     <section>
         <header>
             <h2 class="text-lg font-medium text-gray-900">
-                Profile Information
+                Basic Information
             </h2>
-
-            <p class="mt-1 text-sm text-gray-600">
-                Update your account's profile information and email address.
-            </p>
         </header>
 
         <form
-            @submit.prevent="form.patch(route('profile.update'))"
+            @submit.prevent="form.patch(route('profile.update'), {
+                onSuccess: () => {
+                    toastr.success('Basic Information Updated Successfully');
+                },
+            })"
             class="mt-6 space-y-6"
         >
             <div>
@@ -91,7 +94,8 @@ const form = useForm({
             </div>
 
             <div class="flex items-center gap-4">
-                <PrimaryButton :disabled="form.processing">Save</PrimaryButton>
+                <!-- <PrimaryButton :disabled="form.processing">Save</PrimaryButton> -->
+                <SubmitButton/>
 
                 <Transition
                     enter-active-class="transition ease-in-out"

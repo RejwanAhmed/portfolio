@@ -28,7 +28,7 @@ class User extends Authenticatable
         'linked_in_url',
         'github_url',
         'landing_image_url',
-        'about_us_image_url'
+        'about_me_image_url'
     ];
 
     /**
