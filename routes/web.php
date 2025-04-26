@@ -40,6 +40,10 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('/experiences', ExperienceController::class);
     Route::resource('/educations', EducationController::class);
+    Route::prefix('cvs')->name('cvs.')->group( function() {
+        Route::get('/', [CvController::class, 'index'])->name('index');
+        Route::get('/create', [CvController::class, 'create'])->name('create');
+    });
 });
 
 require __DIR__.'/auth.php';
