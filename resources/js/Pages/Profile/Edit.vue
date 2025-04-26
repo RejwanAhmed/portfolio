@@ -1,6 +1,6 @@
 <template>
     <AuthenticatedLayout :pageTitle="pageTitle" :breadcrumbs="breadcrumbs">
-        <div class="py-12">
+        <div class="">
             <div class="mx-auto max-w-7xl">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div class="bg-white p-4 shadow sm:rounded-lg sm:p-8">

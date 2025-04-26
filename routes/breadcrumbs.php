@@ -118,3 +118,15 @@ Breadcrumbs::for('editEducation', function (BreadcrumbTrail $trail, Education $e
     $trail->parent('education');
     $trail->push('Edit', route('educations.edit', $education));
 });
+
+// Home > CV
+Breadcrumbs::for('cv', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push('CV', route('cvs.index'));
+});
+
+// Home > CV > CVs
+Breadcrumbs::for('cvs', function (BreadcrumbTrail $trail) {
+    $trail->parent('cv');
+    $trail->push('List', route('cvs.index'));
+});

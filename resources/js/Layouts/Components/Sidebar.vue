@@ -97,6 +97,17 @@
                   <span class="flex-1 ms-3 whitespace-nowrap">Education</span>
                </Link>
             </li>
+
+            <li>
+               <Link :href="route('cvs.index')" class="flex items-center p-2 text-gray-50 rounded-lg dark:text-gray hover:text-black hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                  <svg class="w-6 h-6 text-gray-50 transition duration-75 dark:text-gray-700 group-hover:text-gray-900 dark:group-hover:text-white" 
+                     xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                     <path d="M6 2C4.9 2 4 2.9 4 4v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6H6zm7 1.5L18.5 9H14c-.55 0-1-.45-1-1V3.5zM8 14h8v2H8v-2zm0-4h8v2H8v-2z"/>
+                  </svg>
+                  <span class="flex-1 ms-3 whitespace-nowrap">CV</span>
+               </Link>
+               
+            </li>
          </ul>
 
          <ul class="mt-auto space-y-2 font-medium">
