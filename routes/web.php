@@ -42,7 +42,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('/educations', EducationController::class);
     Route::prefix('cvs')->name('cvs.')->group( function() {
         Route::get('/', [CvController::class, 'index'])->name('index');
-        Route::get('/create', [CvController::class, 'create'])->name('create');
+        Route::post('/store', [CvController::class, 'store'])->name('store');
     });
 });
 
