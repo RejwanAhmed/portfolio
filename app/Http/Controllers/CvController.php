@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Constants\Constants;
 use App\Http\Requests\CreateCvRequest;
 use App\Models\Cv;
 use Diglactic\Breadcrumbs\Breadcrumbs;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Services\CvService;
+use Redirect;
 
 class CvController extends Controller
 {
@@ -30,14 +32,13 @@ class CvController extends Controller
         return Inertia::render('Cv/Index', $responseData);
     }
 
-    public function create()
-    {
-
-    }
-
     public function store(CreateCvRequest $request)
     {
-
+        $validatedData = $request->validated();
+        $cv = $this->cvService->createCv($validatedData);
+        $status = $cv ? Constants::SUCCESS : Constants::ERROR;
+        $message = $cv ? 'CV Uploaded Successfully' : 'CV could not be uploaded';
+        return back()->with($status, $message);
     }
 
     public function destroy(Cv $cv)

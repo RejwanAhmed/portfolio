@@ -3,20 +3,23 @@
 namespace App\Services\Core;
 
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class HelperService
 {
     public static function uploadImage($image = null, $oldImagePath = null, $directory)
     {
         if ($image instanceof \Illuminate\Http\UploadedFile) {
-            if($oldImagePath && File::exists(public_path($oldImagePath))) {
-                File::delete(public_path($oldImagePath));
+            if($oldImagePath) {
+                $relativePath = str_replace('storage/', '', $oldImagePath);
+                if(Storage::disk('public')->exists($relativePath)) {
+                    Storage::disk('public')->delete($relativePath);
+                }
             }
 
             $imageName = uniqid().'.'.$image->getClientOriginalExtension();
-            $image->move(public_path($directory), $imageName);
-            $imagePath = $directory.'/'.$imageName;
-            return $imagePath;
+            $path = $image->storeAs($directory, $imageName, 'public');
+            return 'storage/' . $path;
         }
 
         return $oldImagePath;
@@ -24,8 +27,18 @@ class HelperService
 
     public static function deleteImage(string $imagePath)
     {
-        if ($imagePath && File::exists(public_path($imagePath))) {
-            File::delete(public_path($imagePath));
+        if ($imagePath) {
+            $relativePath = str_replace('storage/', '', $imagePath);
+             if (Storage::disk('public')->exists($relativePath)) {
+                Storage::disk('public')->delete($relativePath);
+            }
         }
+    }
+
+    public static function uploadPdf($pdf, $directory)
+    {
+        $pdfName = uniqid().'.'.$pdf->getClientOriginalExtension();
+        $path = $pdf->storeAs($directory, $pdfName, 'public');
+        return 'storage/' . $path;
     }
 }

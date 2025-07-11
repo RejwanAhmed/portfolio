@@ -6,7 +6,7 @@
         <!-- Your form -->
         <form @submit.prevent="submit">
           <input type="file" accept="application/pdf" @change="handleFileChange" class="mb-4" required>
-  
+          <ErrorMessage :errorMessage="formData.errors.file"/>
           <div class="text-right">
             <button type="submit" class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-green-600 dark:hover:bg-green-700 focus:outline-none dark:focus:ring-green-800">
               Save
@@ -21,29 +21,40 @@
 </template>
   
 <script setup lang="ts">
-import { ref } from 'vue';
-import { router } from '@inertiajs/vue3';
+import { useForm } from '@inertiajs/vue3';
+import ErrorMessage from '@/Components/Message/ErrorMessage.vue';
+import { showToast } from '@/Core/helpers/toast';
 
-const emit = defineEmits(['close']);
-const file = ref<File | null>(null)
+const emit = defineEmits(['submitSuccess']);
 
 const handleFileChange = (event: Event) => {
   const target = event.target as HTMLInputElement
-  file.value = target.files?.[0] ?? null
+  const selectedFile = target.files?.[0] ?? null;
+  formData.file = selectedFile;
 }
 
+const formData = useForm({
+  file: null as File | null,
+});
+
 const submit = () => {
-    const formData = new FormData();
-    formData.append('cv', file.value);
-    router.post(route('cvs.store'), formData, {
-        onSuccess: () => {
-            closeModal();
+    formData.post(route('cvs.store'), {
+      onSuccess: (page) => {
+        formData.reset();
+        
+        if ((page.props.flash as { success?: string })?.success) {
+          showToast('success', (page.props.flash as { success: string }).success);
         }
+
+        emit('submitSuccess');
+      },
     })
+
 }
 
 const closeModal = () => {
-    emit('close')
+    formData.reset();
+    emit('submitSuccess');
 }
 </script>
   

@@ -11,7 +11,7 @@ class CreateCvRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,16 @@ class CreateCvRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'file' => 'required|file|mimes:pdf',
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'file.required' => 'File is required',
+            'file.file' => 'Uploaded file is invalid',
+            'file.mimes' => 'Only pdf format is allowed',
         ];
     }
 }
