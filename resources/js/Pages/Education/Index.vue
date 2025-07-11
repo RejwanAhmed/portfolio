@@ -11,7 +11,7 @@
         </div>
 
         <!-- Content Section -->
-        <div  class="container mx-auto px-4 py-6">
+        <div  class="container mx-auto py-6" v-if="props?.educations.length > 0">
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 <div v-for="education in props?.educations" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300 transform hover:scale-105">
                     <div class="flex justify-between items-center mb-2">
@@ -31,6 +31,9 @@
                     <img v-if="education.logo" :src="education.logo" alt="Institution Logo" class="mt-4 w-16 h-16 ">
                 </div>
             </div>
+        </div>
+        <div class="mt-5 text-gray-500" v-else>
+            <p>No Data Found...</p>
         </div>
     </AuthenticatedLayout>
 </template>
