@@ -43,6 +43,17 @@ class CvController extends Controller
 
     public function destroy(Cv $cv)
     {
-        
+        $isDeleted = $this->cvService->deleteCv($cv);
+        $status = $isDeleted ? Constants::SUCCESS : Constants::ERROR;
+        $message = $isDeleted ? 'Cv Deleted Successfully' : 'Cv Could Not Be Deleted';
+        return Redirect::route('cvs.index')->with($status, $message);
+    }
+
+    public function changeStatus(Request $request, Cv $cv)
+    {
+        $cv = $this->cvService->changeStatus($cv);
+        $status = $cv ? Constants::SUCCESS : Constants::ERROR;
+        $message = $cv ? ($cv->status == true ? 'Cv Activated Successfully' : 'Cv Deactivated Successfully') : 'Cv Status Could Not Be Changed';
+        return Redirect::route('cvs.index')->with($status, $message);
     }
 }

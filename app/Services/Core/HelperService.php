@@ -41,4 +41,14 @@ class HelperService
         $path = $pdf->storeAs($directory, $pdfName, 'public');
         return 'storage/' . $path;
     }
+
+    public static function deletePdf(string $pdfPath)
+    {
+        if($pdfPath) {
+            $relativePath = str_replace('storage/', '', $pdfPath);
+            if(Storage::disk('public')->exists($relativePath)) {
+                Storage::disk('public')->delete($relativePath);
+            }
+        }
+    }
 }
