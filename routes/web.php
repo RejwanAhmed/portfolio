@@ -43,6 +43,8 @@ Route::middleware('auth')->group(function () {
     Route::prefix('cvs')->name('cvs.')->group( function() {
         Route::get('/', [CvController::class, 'index'])->name('index');
         Route::post('/store', [CvController::class, 'store'])->name('store');
+        Route::delete('/{cv}', [CvController::class, 'destroy'])->name('destroy');
+        Route::patch('/{cv}/change-status', [CvController::class, 'changeStatus'])->name('changeStatus');
     });
 });
 

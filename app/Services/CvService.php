@@ -30,4 +30,23 @@ class CvService extends BaseModelService
             'status' => 1
         ]);
     }
+
+    public function deleteCv(Cv $cv)
+    {
+        HelperService::deletePdf($cv->path);
+        return $this->delete($cv->id);
+    }
+
+    public function changeStatus(Cv $cv)
+    {
+        $activeCv = $this->model()::where('status', true)->first();
+        if($activeCv) {
+            $activeCv->status = false;
+            $activeCv->save();
+        }
+        
+        $status = $cv->status == true ? false : true;
+        $cv->update(['status' => $status]);
+        return $cv;
+    }
 }

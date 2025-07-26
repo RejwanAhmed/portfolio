@@ -20,12 +20,7 @@
                             <div class="flex gap-2">
                                 <!-- View Button -->
                                 <button class="text-green-700 hover:text-green-300 transition duration-200 ease-in-out text-[20px]" title="View CV">
-                                    <i class="bi bi-eye"></i>
-                                </button>
-
-                                <!-- Download Button -->
-                                <button class="text-blue-700 hover:text-blue-300 transition duration-200 ease-in-out text-[20px]" title="Download CV">
-                                    <i class="bi bi-download"></i>
+                                    <i class="bi bi-eye" @click="openPdfPreview(cv.path)"></i>
                                 </button>
 
                                 <!-- Delete Button -->
@@ -44,7 +39,7 @@
 
                     <!-- Toggle Status Button -->
                     <label class="inline-flex items-center cursor-pointer mt-4">
-                        <input type="checkbox" class="sr-only peer" :checked="cv?.status">
+                        <input type="checkbox" class="sr-only peer" :checked="cv?.status" @change="toggleStatus(cv.id)">
                         <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600 dark:peer-checked:bg-blue-600"></div>
                     </label>
                 </div>
@@ -56,6 +51,7 @@
 
         <!-- Modal -->
         <AddCvModal v-if="isOpenModal" @submitSuccess="submitSuccess" />
+        <PdfPreviewModal v-if="showPdfPreview" :pdfUrl="selectedCvPath" @close="showPdfPreview=false"></PdfPreviewModal>
     </AuthenticatedLayout>
 </template>
 
@@ -66,7 +62,8 @@ import DeleteConfirmationButton from '@/Components/Button/DeleteConfirmationButt
 import { BreadcrumbInterface } from '@/Core/helpers/Interfaces';
 import AddCvModal from '@/Pages/Cv/Modal/AddCvModal.vue';
 import { router } from '@inertiajs/vue3';
-import { Link } from '@inertiajs/vue3';
+import PdfPreviewModal from '@/Pages/Cv/Modal/PdfPreviewModal.vue';
+import { showToast } from '@/Core/helpers/toast';
 
 const props = defineProps({
     cvs: Object as () => ICv[] | undefined,
@@ -75,12 +72,31 @@ const props = defineProps({
 })
 
 const isOpenModal = ref(false);
+const showPdfPreview = ref(false);
+const selectedCvPath = ref(null);
 
 interface ICv {
     id: number,
     created_at: string,
     status: boolean
     path: string,
+}
+
+const openPdfPreview = (path: String) => {
+    showPdfPreview.value = true;
+    selectedCvPath.value = path;
+}
+
+const toggleStatus = (id: number) => {
+    router.patch(route('cvs.changeStatus', id), {}, {
+        preserveScroll: true,
+        onSuccess: (page) => {
+            if ((page.props.flash as { success?: string })?.success) {
+                showToast('success', (page.props.flash as { success: string }).success);
+            }
+            router.reload({ only: ['cvs'] });
+        },
+    });
 }
 
 const submitSuccess = () => {
