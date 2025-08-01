@@ -1,5 +1,5 @@
 <template>
-<section id="introduction" class="bg-black text-white py-20">
+    <section id="introduction" class="bg-black text-white py-20">
         <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <!-- Left: Profile Image -->
             <div class="flex justify-center">
@@ -11,7 +11,8 @@
             <div class="space-y-10">
                 <div class="text-center md:text-left">
                     <h1 class="text-2xl md:text-3xl text-gray-400 mb-2">Hello, this is</h1>
-                    <h2 class="text-5xl md:text-6xl font-extrabold text-white">Md. <span class="font-bold text-yellow-400">Rejwan</span> Ahmed</h2>
+                    <h2 class="text-5xl md:text-6xl font-extrabold text-white">Md. <span
+                            class="font-bold text-yellow-400">Rejwan</span> Ahmed</h2>
                     <p class="text-lg md:text-xl text-gray-300 mt-3 font-medium">
                         <span id="typewriter"
                             class="text-yellow-400 border-r-2 border-yellow-400 animate-pulse pr-1"></span>

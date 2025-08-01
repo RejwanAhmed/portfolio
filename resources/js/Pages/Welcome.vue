@@ -22,5 +22,3 @@ import Experience from '@/Pages/Front/Experience.vue';
 import ContactMe from '@/Pages/Front/ContactMe.vue';
 import Footer from '@/Pages/Front/Footer.vue';
 </script>
-
-

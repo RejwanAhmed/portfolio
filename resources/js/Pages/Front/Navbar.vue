@@ -9,13 +9,20 @@
 
                 <!-- Desktop Menu -->
                 <div class="hidden md:flex space-x-6">
-                    <a href="#introduction" @click.prevent="scrollToSection('introduction')" class="hover:text-yellow-400 transition">Home</a>
-                    <a href="#about" @click.prevent="scrollToSection('about')" class="hover:text-yellow-400 transition">About</a>
-                    <a href="#experience" @click.prevent="scrollToSection('experience')" class="hover:text-yellow-400 transition">Experience</a>
-                    <a href="#education" @click.prevent="scrollToSection('education')" class="hover:text-yellow-400 transition">Education</a>
-                    <a href="#skill" @click.prevent="scrollToSection('skill')" class="hover:text-yellow-400 transition">Skill</a>
-                    <a href="#projects" @click.prevent="scrollToSection('projects')" class="hover:text-yellow-400 transition">Projects</a>
-                    <a href="#contact" @click.prevent="scrollToSection('contact')" class="hover:text-yellow-400 transition">Contact</a>
+                    <a href="#introduction" @click.prevent="scrollToSection('introduction')"
+                        class="hover:text-yellow-400 transition">Home</a>
+                    <a href="#about" @click.prevent="scrollToSection('about')"
+                        class="hover:text-yellow-400 transition">About</a>
+                    <a href="#experience" @click.prevent="scrollToSection('experience')"
+                        class="hover:text-yellow-400 transition">Experience</a>
+                    <a href="#education" @click.prevent="scrollToSection('education')"
+                        class="hover:text-yellow-400 transition">Education</a>
+                    <a href="#skill" @click.prevent="scrollToSection('skill')"
+                        class="hover:text-yellow-400 transition">Skill</a>
+                    <a href="#projects" @click.prevent="scrollToSection('projects')"
+                        class="hover:text-yellow-400 transition">Projects</a>
+                    <a href="#contact" @click.prevent="scrollToSection('contact')"
+                        class="hover:text-yellow-400 transition">Contact</a>
                 </div>
 
                 <!-- Mobile menu button -->
@@ -36,13 +43,20 @@
 
         <!-- Mobile Menu Dropdown -->
         <div v-if="isOpen" class="md:hidden px-4 pb-4 space-y-2">
-            <a href="#introduction" @click.prevent="scrollToSection('introduction')" class="block hover:text-yellow-400 transition">Home</a>
-            <a href="#about" @click.prevent="scrollToSection('about')" class="block hover:text-yellow-400 transition">About</a>
-            <a href="#experience" @click.prevent="scrollToSection('experience')" class="block hover:text-yellow-400 transition">Experience</a>
-            <a href="#education" @click.prevent="scrollToSection('education')" class="block hover:text-yellow-400 transition">Education</a>
-            <a href="#skill" @click.prevent="scrollToSection('skill')" class="block hover:text-yellow-400 transition">Skill</a>
-            <a href="#projects" @click.prevent="scrollToSection('projects')" class="block hover:text-yellow-400 transition">Projects</a>
-            <a href="#contact" @click.prevent="scrollToSection('contact')" class="block hover:text-yellow-400 transition">Contact</a>
+            <a href="#introduction" @click.prevent="scrollToSection('introduction')"
+                class="block hover:text-yellow-400 transition">Home</a>
+            <a href="#about" @click.prevent="scrollToSection('about')"
+                class="block hover:text-yellow-400 transition">About</a>
+            <a href="#experience" @click.prevent="scrollToSection('experience')"
+                class="block hover:text-yellow-400 transition">Experience</a>
+            <a href="#education" @click.prevent="scrollToSection('education')"
+                class="block hover:text-yellow-400 transition">Education</a>
+            <a href="#skill" @click.prevent="scrollToSection('skill')"
+                class="block hover:text-yellow-400 transition">Skill</a>
+            <a href="#projects" @click.prevent="scrollToSection('projects')"
+                class="block hover:text-yellow-400 transition">Projects</a>
+            <a href="#contact" @click.prevent="scrollToSection('contact')"
+                class="block hover:text-yellow-400 transition">Contact</a>
         </div>
     </nav>
 </template>
@@ -56,11 +70,11 @@ const toggleMenu = () => {
 };
 
 const scrollToSection = (id: string) => {
-  const el = document.getElementById(id);
-  if (el) {
-    const yOffset = -64; // adjust based on your navbar height
-    const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
-    window.scrollTo({ top: y, behavior: 'smooth' });
-  }
+    const el = document.getElementById(id);
+    if (el) {
+        const yOffset = -64; // adjust based on your navbar height
+        const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+    }
 };
 </script>
