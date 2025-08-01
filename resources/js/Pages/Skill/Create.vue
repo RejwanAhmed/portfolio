@@ -29,6 +29,15 @@
                         <ErrorMessage :errorMessage="formData.errors.proficiency_level"/>
                     </div>
                 </div>
+
+                <div class="md:flex md:space-x-4">
+                    <!-- Color Picker -->
+                    <div class="md:w-1/2 w-full">
+                        <label for="color" class="block text-sm font-medium text-gray-700 mb-1"> Pick a Color<span class="text-red-500">*</span></label>
+                        <Field id="color" name="color" type="color" v-model="formData.color" class="block w-full h-10 p-1 border border-gray-600 rounded-md bg-transparent focus:ring focus:ring-indigo-300 transition ease-in-out duration-200"/>
+                        <ErrorMessage :errorMessage="formData.errors.color"/>
+                    </div>
+                </div>
                 <SubmitButton />
             </VForm>
         </div>
@@ -54,6 +63,7 @@ const formData = useForm({
     name: props.skill?.name || '',
     image_url: props.skill?.image_url || '',
     proficiency_level: props.skill?.proficiency_level || '',
+    color: props.skill?.color || '',
 })
 
 const imagePreview = ref<string | null>(null); // Store the preview URL
@@ -84,6 +94,7 @@ const submit = () => {
         form.append('_method', 'patch');
         form.append('name', formData.name);
         form.append('proficiency_level', formData.proficiency_level);
+        form.append('color', formData.color);
         if (formData.image_url instanceof File) {
             form.append('image_url', formData.image_url); // New image selected
         } else  {

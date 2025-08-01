@@ -31,6 +31,7 @@
                                 <img height="100px" width="100px" :src="skill.image_url" alt="Preview" class="w-12 h-12 object-cover rounded-md" />  
                             </td>
                             <td>{{ skill?.proficiency_level }}</td>
+                            <td><input type="color" :value="skill?.color"></td>
                             <td class = "space-x-2">
                                 <EditButton :obj="skill" redirectionRoute="skills.edit"/>
                                 <DeleteConfirmationButton :obj="skill" confirmRoute="skills.destroy"/>
@@ -71,6 +72,7 @@ const columnNames = [
     'name',
     'image',
     'proficency level',
+    'color'
 ]
 
 interface ISkill {
@@ -78,5 +80,6 @@ interface ISkill {
     name: string,
     image_url: string,
     proficiency_level: string,
+    color: string,
 }
 </script>
