@@ -10,7 +10,8 @@ class Skill extends Model
     protected $fillable = [
         'name',
         'image_url',
-        'proficiency_level'
+        'proficiency_level',
+        'color',
     ];
 
     public function projects()

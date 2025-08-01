@@ -40,7 +40,7 @@ class UpdateSkillRequest extends FormRequest
                     if ($value instanceof \Illuminate\Http\UploadedFile) {
                         $validator = \Validator::make(
                             [$attribute => $value],
-                            ['image_url' => 'image|mimes:jpg,jpeg,png|max:1048']
+                            ['image_url' => 'mimes:jpg,jpeg,png,svg|max:1048']
                         );
             
                         if ($validator->fails()) {
@@ -49,6 +49,7 @@ class UpdateSkillRequest extends FormRequest
                     }
                 },
             ],
+            'color' => 'required'
         ];
     }
 
@@ -63,6 +64,8 @@ class UpdateSkillRequest extends FormRequest
             'proficiency_level.integer' =>  'Proficiency level must be an integer.',
             'proficiency_level.min' => 'Proficiency level must be greater than 0.',
             'proficiency_level.max' => 'Proficiency level cannot exceed 100.',
+
+            'color.required' => 'Please select a color',
         ];
     }
 }

@@ -24,7 +24,8 @@ class CreateSkillRequest extends FormRequest
         return [
             'name' => 'required|string|unique:skills,name',
             'proficiency_level' => 'required|integer|min:1|max:100',
-            'image_url' => 'required|image|mimes:jpg,jpeg,png|max:1048'
+            'image_url' => 'required|mimes:jpg,jpeg,png,svg|max:1048',
+            'color' => 'required'
             // 'image_url' => 'required|image|mimes:jpg,jpeg,png|dimensions:width=60,height=60|max:1048'
         ];
     }
@@ -42,10 +43,11 @@ class CreateSkillRequest extends FormRequest
             'proficiency_level.max' => 'Proficiency level cannot exceed 100.',
 
             'image_url.required' => 'Skill image is required.',
-            'image_url.image' => 'Uploaded file must be an image.',
-            'image_url.mimes' => 'Image must be a file of type: png, jpg, jpeg.',
+            'image_url.mimes' => 'Image must be a file of type: png, jpg, jpeg, svg.',
             'image_url.dimensions' => 'Image must be exactly 60x60 pixels.',
             'image_url.max' => 'Image size must not exceed 1MB (1048KB).',
+
+            'color.required' => 'Please select a color',
         ];
     }
 }

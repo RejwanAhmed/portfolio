@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('image_url');
             $table->integer('proficiency_level');
+            $table->string('color');
             $table->timestamps();
         });
     }
