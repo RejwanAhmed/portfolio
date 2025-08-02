@@ -24,6 +24,7 @@ export default {
         forms, 
         flowbite({
             datatables: true,
-        })
+        }),
+        [require('@tailwindcss/typography')],
     ],
 };

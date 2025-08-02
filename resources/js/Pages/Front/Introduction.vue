@@ -3,7 +3,7 @@
         <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <!-- Left: Profile Image -->
             <div class="flex justify-center">
-                <img src="/storage/uploads/Rejwan.jpeg" alt="Profile"
+                <img :src="props?.aboutMe.landing_image_url" alt="Profile"
                     class="rounded-3xl w-81 h-81 object-cover shadow-xl ring-4 ring-gray-800" />
             </div>
 
@@ -22,27 +22,27 @@
                 <ul class="space-y-3 text-base md:text-lg">
                     <li class="flex items-center gap-4">
                         <Home class="w-6 h-6 text-gray-400" />
-                        <span>Dhaka, Bangladesh</span>
+                        <span>{{ props?.aboutMe.address }}</span>
                     </li>
                     <li class="flex items-center gap-4">
                         <Phone class="w-6 h-6 text-gray-400" />
-                        <span>+880 1234 567890</span>
+                        <span>{{ props?.aboutMe.phone }}</span>
                     </li>
                     <li class="flex items-center gap-4">
                         <Mail class="w-6 h-6 text-gray-400" />
-                        <span>your.email@example.com</span>
+                        <span>{{ props?.aboutMe.email }}</span>
                     </li>
                     <li class="flex items-center gap-4">
                         <Linkedin class="w-6 h-6 text-gray-400" />
-                        <a href="https://linkedin.com/in/your-linkedin" target="_blank"
+                        <a :href="props?.aboutMe.linked_in_url" target="_blank"
                             class="text-blue-400 hover:underline">
-                            linkedin.com/in/your-linkedin
+                            {{ props?.aboutMe.linked_in_url }}
                         </a>
                     </li>
                     <li class="flex items-center gap-4">
                         <Github class="w-6 h-6 text-gray-400" />
-                        <a href="https://github.com/yourusername" target="_blank" class="text-blue-400 hover:underline">
-                            github.com/yourusername
+                        <a :href="props?.aboutMe.github_url" target="_blank" class="text-blue-400 hover:underline">
+                            {{ props?.aboutMe.github_url }}
                         </a>
                     </li>
                 </ul>
@@ -54,7 +54,9 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { Home, Phone, Mail, Linkedin, Github } from 'lucide-vue-next';
-
+const props = defineProps({
+    aboutMe: Object,
+});
 const isOpen = ref(false);
 const toggleMenu = () => {
     isOpen.value = !isOpen.value;

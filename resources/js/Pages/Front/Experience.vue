@@ -4,20 +4,18 @@
             <h2 class="text-4xl font-bold text-yellow-400 text-center mb-12">Experience</h2>
 
             <div class="space-y-8">
-                <div v-for="(exp, index) in experiences" :key="index"
+                <div v-for="(exp, index) in props?.experiences" :key="index"
                     class="border-l-4 border-yellow-400 pl-6 relative bg-gray-900 rounded-xl p-6 shadow hover:shadow-yellow-600/20 transition">
-                    <h3 class="text-xl font-bold mb-1">{{ exp.title }}</h3>
-                    <p class="text-gray-400 text-sm mb-2">
-                        {{ exp.company }} — {{ formatDate(exp.start_date) }} to {{ formatDate(exp.end_date) }}
+                    <h3 class="text-xl font-bold mb-1">{{ exp.job_title }}</h3>
+                    <p class="text-gray-400 text-sm">
+                        <span class="font-bold text-yellow-300"> {{ exp.company_name }} </span> — <span
+                            class="text-yellow-400">({{ formatDate(exp.start_date) }} - <span v-if="exp.end_date">{{
+                                formatDate(exp.end_date) }}</span> <span v-else>Currently Working</span>)</span>
                     </p>
-
-                    <!-- Tech stack -->
-                    <div class="flex flex-wrap gap-2 mb-3">
-                        <span v-for="(tech, i) in exp.technologies" :key="i"
-                            class="bg-gray-700 text-xs px-2 py-1 rounded">
-                            {{ tech }}
-                        </span>
-                    </div>
+                    <p class="text-gray-400 text-sm mb-2">Duration: Total: {{ calculateDuration(exp.start_date,
+                        exp.end_date) }}</p>
+                    <h2 class="text-gray-400 font-bold text-lg mt-3 mb-1">Responsibilities:</h2>
+                    <div class="prose max-w-none" v-html="exp.description"></div>
 
                     <!-- Responsibilities -->
                     <ul class="list-disc list-inside text-gray-300 space-y-1">
@@ -29,35 +27,12 @@
     </section>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue';
 
-const experiences = ref([
-    {
-        title: 'Full Stack Developer',
-        company: 'Tech Innovators Ltd.',
-        start_date: '2023-01-01',
-        end_date: '2024-06-01',
-        technologies: ['Laravel', 'Vue 3', 'Inertia.js', 'MySQL'],
-        responsibilities: [
-            'Developed and maintained multiple enterprise-level web applications.',
-            'Integrated RESTful APIs and handled complex database relations.',
-            'Worked closely with designers to deliver pixel-perfect UIs.',
-        ]
-    },
-    {
-        title: 'Backend Developer',
-        company: 'CodeCraft Bangladesh',
-        start_date: '2021-06-01',
-        end_date: '2022-12-01',
-        technologies: ['Laravel', 'Redis', 'PostgreSQL', 'REST API'],
-        responsibilities: [
-            'Built scalable APIs and handled large data sets efficiently.',
-            'Optimized Laravel queues and background jobs.',
-            'Collaborated with frontend team on API specifications.',
-        ]
-    }
-]);
+const props = defineProps({
+    experiences: Object,
+});
 
 const formatDate = (date) => {
     return new Date(date).toLocaleDateString('en-US', {
@@ -65,4 +40,38 @@ const formatDate = (date) => {
         year: 'numeric'
     });
 };
+
+function calculateDuration(startDateStr: string, endDateStr: string): string {
+    const startDate = new Date(startDateStr);
+    const endDate = endDateStr ? new Date(endDateStr) : new Date();
+
+    // Ensure valid dates
+    if (isNaN(startDate.getTime()) || isNaN(endDate.getTime())) {
+        return 'Invalid date';
+    }
+
+    // Swap if start > end
+    if (startDate > endDate) {
+        [startDateStr, endDateStr] = [endDateStr, startDateStr];
+        return calculateDuration(startDateStr, endDateStr);
+    }
+
+    let years = endDate.getFullYear() - startDate.getFullYear();
+    let months = endDate.getMonth() - startDate.getMonth();
+
+    if (months < 0) {
+        years--;
+        months += 12;
+    }
+
+    const yearPart = years > 0 ? `${years} year${years > 1 ? 's' : ''}` : ' 0 year';
+    const monthPart = months > 0 ? `${months} month${months > 1 ? 's' : ''}` : ' 0 month';
+
+    if (yearPart && monthPart) return `${yearPart} ${monthPart}`;
+    if (yearPart) return yearPart;
+    if (monthPart) return monthPart;
+
+    return 'Less than a month';
+}
+
 </script>

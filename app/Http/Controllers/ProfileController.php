@@ -72,6 +72,7 @@ class ProfileController extends Controller
     public function updateOtherInformation(ProfileOtherInformationUpdateRequest $request, User $user)
     {
         $validatedData = $request->validated();
+        // dd($validatedData);
         if (!$user->about_me_image_url) {
             $about_me_image_path = HelperService::uploadImage($validatedData['about_me_image_url'], null, 'uploads/profile');
         } else {
