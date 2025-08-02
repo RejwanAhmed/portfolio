@@ -2,3 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+
+.prose .ql-indent-1 {
+  margin-left: 1.5em;
+}
+.prose .ql-indent-2 {
+  margin-left: 3em;
+}
+.prose .ql-indent-3 {
+  margin-left: 4.5em;
+}

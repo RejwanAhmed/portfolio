@@ -3,7 +3,7 @@
         <div class="max-w-4xl mx-auto px-6 text-center">
             <h2 class="text-4xl font-bold text-yellow-400 mb-4">Contact Me</h2>
             <p class="text-gray-400 mb-10">
-                Have a project or want to work together? Feel free to reach out.
+                Want to hire or work together? Feel free to reach out.
             </p>
 
             <!-- Contact Form -->
@@ -26,19 +26,6 @@
                     Send Message
                 </button>
             </form>
-
-            <!-- Contact Links -->
-            <div class="mt-12 flex justify-center gap-6 text-gray-400 text-xl">
-                <a href="mailto:youremail@example.com" class="hover:text-yellow-400 transition">
-                    <i class="fas fa-envelope"></i>
-                </a>
-                <a href="https://github.com/yourusername" target="_blank" class="hover:text-yellow-400 transition">
-                    <i class="fab fa-github"></i>
-                </a>
-                <a href="https://linkedin.com/in/yourusername" target="_blank" class="hover:text-yellow-400 transition">
-                    <i class="fab fa-linkedin"></i>
-                </a>
-            </div>
         </div>
     </section>
 </template>
@@ -54,8 +41,6 @@ const form = ref({
 });
 
 const submitForm = () => {
-    // Implement actual form submission or API call
-    console.log("Form Submitted:", form.value);
     alert("Message sent!");
     form.value = { name: "", email: "", subject: "", message: "" };
 };

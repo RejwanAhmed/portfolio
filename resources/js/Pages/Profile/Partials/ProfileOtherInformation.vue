@@ -49,7 +49,8 @@
             <!-- Long Description Field -->
             <div>
                 <label for="long_description" class="block text-sm font-medium text-gray-700">Long Description </label>
-                <QuillEditor  v-model:content="formData.long_description" contentType="html" theme="snow" toolbar="essential" />
+                <!-- <QuillEditor  v-model:content="formData.long_description" contentType="html" theme="snow" toolbar="essential" /> -->
+                <textarea name="long_description" v-model="formData.long_description" rows="10" cols="90"></textarea>
                 <ErrorMessage :errorMessage="formData.errors.long_description"/>
             </div>
 
