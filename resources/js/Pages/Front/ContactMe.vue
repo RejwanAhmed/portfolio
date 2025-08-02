@@ -7,41 +7,55 @@
             </p>
 
             <!-- Contact Form -->
-            <form @submit.prevent="submitForm" class="space-y-6 text-left">
+            <VForm @submit="submit" class="space-y-6 text-left">
                 <div class="grid md:grid-cols-2 gap-4">
-                    <input type="text" v-model="form.name" placeholder="Your Name" required
-                        class="bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 w-full focus:outline-none focus:border-yellow-400 text-white" />
-                    <input type="email" v-model="form.email" placeholder="Your Email" required
-                        class="bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 w-full focus:outline-none focus:border-yellow-400 text-white" />
+                    <Field type="text" v-model="form.name" placeholder="Your Name" required
+                        class="bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 w-full focus:outline-none focus:border-yellow-400 text-white" name="name"/>
+                    <ErrorMessage :errorMessage="form.errors.name"/>
+                    <Field type="email" v-model="form.email" placeholder="Your Email" required
+                    class="bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 w-full focus:outline-none focus:border-yellow-400 text-white" name="email"/>
+                    <ErrorMessage :errorMessage="form.errors.email"/>
                 </div>
-
-                <input type="text" v-model="form.subject" placeholder="Subject"
-                    class="bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 w-full focus:outline-none focus:border-yellow-400 text-white" />
-
-                <textarea v-model="form.message" rows="5" placeholder="Your Message" required
-                    class="bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 w-full focus:outline-none focus:border-yellow-400 text-white resize-none"></textarea>
-
+                
+                <Field type="text" v-model="form.subject" placeholder="Subject"
+                class="bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 w-full focus:outline-none focus:border-yellow-400 text-white" name="subject"/>
+                
+                <Field as="textarea" v-model="form.message" rows="5" placeholder="Your Message" required
+                class="bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 w-full focus:outline-none focus:border-yellow-400 text-white resize-none" name="message" />
+                <ErrorMessage :errorMessage="form.errors.message"/>
+                
                 <button type="submit"
                     class="bg-yellow-400 text-black font-semibold px-6 py-3 rounded-lg hover:bg-yellow-300 transition">
                     Send Message
                 </button>
-            </form>
+            </VForm>
         </div>
     </section>
 </template>
 
-<script setup>
-import { ref } from "vue";
+<script setup lang="ts">
+import ErrorMessage from "@/Components/Message/ErrorMessage.vue";
+import { Field, Form as VForm } from "vee-validate";
+import { useForm } from '@inertiajs/vue3';
+import { usePage } from '@inertiajs/vue3';
 
-const form = ref({
+const form = useForm({
     name: "",
     email: "",
     subject: "",
     message: "",
 });
 
-const submitForm = () => {
-    alert("Message sent!");
-    form.value = { name: "", email: "", subject: "", message: "" };
+const submit = () => {
+    form.post(route('contactMe'), {
+        preserveScroll: true,
+        onSuccess: (page) => {
+            form.reset();
+            const flash = usePage().props.flash as { success?: string };
+            if (flash?.success) {
+                alert(flash.success);
+            }
+      },
+    });
 };
 </script>
