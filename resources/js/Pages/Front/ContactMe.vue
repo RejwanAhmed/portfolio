@@ -1,6 +1,6 @@
 <template>
     <section id="contact" class="bg-black text-white py-20">
-        <div class="max-w-4xl mx-auto px-6 text-center">
+        <div class="max-w-6xl mx-auto px-6 text-center">
             <h2 class="text-4xl font-bold text-yellow-400 mb-4">Contact Me</h2>
             <p class="text-gray-400 mb-10">
                 Want to hire or work together? Feel free to reach out.

@@ -1,6 +1,6 @@
 <template>
     <section id="education" class="bg-gray-950 text-white py-20">
-        <div class="max-w-6xl mx-auto px-6">
+        <div class="max-w-7xl mx-auto px-6">
             <h2 class="text-4xl font-bold text-yellow-400 text-center mb-12">Education</h2>
 
             <div class="relative border-l-4 border-yellow-500 ml-4 pl-6 space-y-12">

@@ -1,7 +1,7 @@
 <template>
 
     <Navbar></Navbar>
-    <Introduction :aboutMe="props?.aboutMe"></Introduction>
+    <Introduction :aboutMe="props?.aboutMe" :cv="props?.cv"></Introduction>
     <AboutMe :aboutMe="props?.aboutMe" :skills="props?.skills"></AboutMe>
     <Experience :experiences="props?.experiences"></Experience>
     <Education :educations="props?.educations"></Education>
@@ -28,5 +28,6 @@ const props = defineProps({
     educations: Object,
     projects: Object,
     experiences: Object,
+    cv: Object,
 });
 </script>
