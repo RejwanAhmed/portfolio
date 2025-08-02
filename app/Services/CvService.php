@@ -13,6 +13,11 @@ class CvService extends BaseModelService
         return Cv::class;
     }
 
+    public function getActiveCv()
+    {
+        return $this->model()::where('status', 1)->first();
+    }
+
     public function createCv($validatedData)
     {
         $filePath = HelperService::uploadPdf($validatedData['file'], 'uploads/cvs');

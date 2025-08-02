@@ -12,12 +12,15 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Project\ProjectController;
 use App\Http\Controllers\Project\ProjectImageController;
 use App\Http\Controllers\ContactController;
-
+use Diglactic\Breadcrumbs\Breadcrumbs;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
+    return Inertia::render('Dashboard', [
+        'breadcrumbs' => Breadcrumbs::generate('profile'),
+        'pageTitle' => 'Dashboard',
+    ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::post('/contact', [ContactController::class, 'send'])->name('contactMe');

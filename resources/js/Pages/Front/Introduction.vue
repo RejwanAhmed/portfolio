@@ -46,6 +46,12 @@
                         </a>
                     </li>
                 </ul>
+
+                <div class="mt-4" v-if="props?.cv">
+                    <a :href="props?.cv.path" target="_blank" download class="bg-yellow-400 text-black font-semibold px-6 py-3 rounded-lg hover:bg-yellow-300 transition">
+                        Download CV
+                    </a>
+                </div>
             </div>
         </div>
     </section>
@@ -56,6 +62,7 @@ import { ref } from 'vue';
 import { Home, Phone, Mail, Linkedin, Github } from 'lucide-vue-next';
 const props = defineProps({
     aboutMe: Object,
+    cv: Object,
 });
 const isOpen = ref(false);
 const toggleMenu = () => {
