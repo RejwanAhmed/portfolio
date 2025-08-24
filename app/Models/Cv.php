@@ -10,4 +10,7 @@ class Cv extends Model
         'path',
         'status'
     ];
+    protected $casts = [
+        'status' => 'boolean',
+    ];
 }

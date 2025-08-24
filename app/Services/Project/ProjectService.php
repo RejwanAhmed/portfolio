@@ -14,7 +14,7 @@ class ProjectService extends BaseModelService
 
     public function getAllProjects()
     {
-        return $this->model()::with(['projectImages', 'skills'])->get();
+        return $this->model()::with(['projectImages', 'skills'])->orderByDesc('id')->get();
     }
 
     public function createProject($validatedData)
