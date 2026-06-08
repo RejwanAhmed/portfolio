@@ -42,7 +42,7 @@
             <!-- Short Description Field -->
             <div>
                 <label for="short_description" class="block text-sm font-medium text-gray-700">Short Description </label>
-                <QuillEditor  v-model:content="formData.short_description" contentType="html" theme="snow" toolbar="essential" />
+                <QuillEditor  v-model:content="formData.short_description" contentType="html" theme="snow" :options="quillOptions" />
                 <ErrorMessage :errorMessage="formData.errors.short_description"/>
             </div>
 
@@ -91,6 +91,7 @@ import '@vueup/vue-quill/dist/vue-quill.snow.css';
 import '@vueup/vue-quill/dist/vue-quill.bubble.css';
 import toastr from 'toastr';
 import 'toastr/toastr.scss';
+import { quillOptions } from '@/composables/useQuillOptions';
 
 const props = defineProps({
     user: Object,
