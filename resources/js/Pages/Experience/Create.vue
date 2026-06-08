@@ -38,7 +38,7 @@
                 <!-- Description Field -->
                 <div>
                     <label for="description" class="block text-sm font-medium text-gray-700">Description <span class="text-red-500">*</span></label>
-                    <QuillEditor  v-model:content="formData.description" contentType="html" theme="snow" toolbar="essential" />
+                    <QuillEditor  v-model:content="formData.description" contentType="html" theme="snow" :options="quillOptions" />
                     <ErrorMessage :errorMessage="formData.errors.description"/>
                 </div>
                 <SubmitButton />
@@ -57,6 +57,7 @@ import { BreadcrumbInterface } from '@/Core/helpers/Interfaces';
 import { QuillEditor } from '@vueup/vue-quill'
 import '@vueup/vue-quill/dist/vue-quill.snow.css';
 import '@vueup/vue-quill/dist/vue-quill.bubble.css';
+import { quillOptions } from '@/composables/useQuillOptions';
 
 const props = defineProps({
     experience: Object,
