@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class JobApplication extends Model
 {
-    protected $fillable = ['cv_id', 'company_name', 'title', 'job_url', 'source', 'location', 'salary_min', 'salary_max', 'status', 'application_date', 'notes'];
+    protected $fillable = ['cv_id', 'company_name', 'title', 'job_url', 'source', 'location', 'salary_min', 'salary_max', 'status', 'application_date', 'description'];
 
     public function cv()
     {

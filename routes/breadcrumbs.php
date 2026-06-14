@@ -4,6 +4,7 @@
 // this import. This is nice for IDE syntax and refactoring.
 use App\Models\Education;
 use App\Models\Experience;
+use App\Models\JobApplication;
 use App\Models\Project\Project;
 use App\Models\Skill;
 use Diglactic\Breadcrumbs\Breadcrumbs;
@@ -129,4 +130,34 @@ Breadcrumbs::for('cv', function (BreadcrumbTrail $trail) {
 Breadcrumbs::for('cvs', function (BreadcrumbTrail $trail) {
     $trail->parent('cv');
     $trail->push('List', route('cvs.index'));
+});
+
+// Home -> Job Application
+Breadcrumbs::for('job-application', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push('Job Application', route('job-applications.index'));
+});
+
+// Home -> Job Application > Job Applications
+Breadcrumbs::for('job-applications', function (BreadcrumbTrail $trail) {
+    $trail->parent('job-application');
+    $trail->push('List', route('job-applications.index'));
+});
+
+// Home > Job Application > Add
+Breadcrumbs::for('addJobApplication', function (BreadcrumbTrail $trail) {
+    $trail->parent('job-application');
+    $trail->push('Add', route('job-applications.create'));
+});
+
+// Home > Job Application > Edit
+Breadcrumbs::for('editJobApplication', function (BreadcrumbTrail $trail, JobApplication $jobApplication) {
+    $trail->parent('job-application');
+    $trail->push('Edit', route('job-applications.edit', $jobApplication));
+});
+
+// Home > Job Application > Edit
+Breadcrumbs::for('viewJobApplication', function (BreadcrumbTrail $trail, JobApplication $jobApplication) {
+    $trail->parent('job-application');
+    $trail->push('View', route('job-applications.show', $jobApplication));
 });
