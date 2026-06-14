@@ -106,7 +106,15 @@
                   </svg>
                   <span class="flex-1 ms-3 whitespace-nowrap">CV</span>
                </Link>
-               
+            </li>
+
+            <li>
+               <Link :href="route('job-applications.index')" class="flex items-center p-2 text-gray-50 rounded-lg dark:text-gray hover:text-black hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                  <svg class="w-6 h-6 text-gray-50 transition duration-75 dark:text-gray-700 group-hover:text-gray-900 dark:group-hover:text-white" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                     <path d="M19 3h-3.18C15.4 1.84 14.3 1 13 1h-2c-1.3 0-2.4.84-2.82 2H5a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zm-8-1h2a1 1 0 0 1 1 1h-4a1 1 0 0 1 1-1zm-2 15-2-2 1.41-1.41L9 14.17l3.59-3.59L14 12l-5 5zm8-1h-4v-2h4v2zm0-4h-4v-2h4v2z"/>
+                  </svg>
+                  <span class="flex-1 ms-3 whitespace-nowrap">Job Application Tracker</span>
+               </Link>
             </li>
          </ul>
 

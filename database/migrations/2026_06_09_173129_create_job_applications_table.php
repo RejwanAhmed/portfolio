@@ -13,17 +13,17 @@ return new class extends Migration
     {
         Schema::create('job_applications', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('cv_id')->constrained('cvs')->nullOnDelete();
+            $table->foreignId('cv_id')->nullable()->constrained('cvs')->nullOnDelete();
             $table->string('company_name');
             $table->string('title');
-            $table->string('job_url')->nullable();
+            $table->text('job_url')->nullable();
             $table->string('source')->nullable();
             $table->string('location')->nullable();
             $table->unsignedInteger('salary_min')->nullable();
             $table->unsignedInteger('salary_max')->nullable();
             $table->enum('status', ['saved', 'applied', 'offer', 'accepted', 'rejected', 'withdrawn'])->default('saved');
             $table->date('application_date')->nullable();
-            $table->text('notes')->nullable();
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }

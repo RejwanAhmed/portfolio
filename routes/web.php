@@ -4,9 +4,9 @@ use App\Http\Controllers\CvController;
 use App\Http\Controllers\EducationController;
 use App\Http\Controllers\ExperienceController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\JobApplicationController;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Foundation\Application;
 use App\Http\Controllers\SkillController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Project\ProjectController;
@@ -47,6 +47,7 @@ Route::middleware('auth')->group(function () {
         Route::delete('/{cv}', [CvController::class, 'destroy'])->name('destroy');
         Route::patch('/{cv}/change-status', [CvController::class, 'changeStatus'])->name('changeStatus');
     });
+    Route::resource('job-applications', JobApplicationController::class);
 });
 
 require __DIR__.'/auth.php';
