@@ -11,36 +11,18 @@
         </div>
 
         <!-- Content Section -->
-        <div class="overflow-hidden bg-white shadow-md sm:rounded-lg">
-            <div class="p-6 text-gray-900">
-                <table id="default-table">
-                    <thead>
-                        <tr>
-                            <ColumnName :columnNames="columnNames"/>
-                            <th>
-                                <span class="flex items-center">
-                                    Action
-                                </span>
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr v-for="skill in skills" :key="skill.id">
-                            <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ skill?.name }}</td>
-                            <td>
-                                <img height="100px" width="100px" :src="skill.image_url" alt="Preview" class="w-12 h-12 object-cover rounded-md" />  
-                            </td>
-                            <td>{{ skill?.proficiency_level }}</td>
-                            <td><input type="color" :value="skill?.color"></td>
-                            <td class = "space-x-2">
-                                <EditButton :obj="skill" redirectionRoute="skills.edit"/>
-                                <DeleteConfirmationButton :obj="skill" confirmRoute="skills.destroy"/>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+        <DataTable :items="skills" :columns="columns" :search-keys="searchableKeys" class="mt-5">
+            <template #row="{ item }">
+                <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ item?.name }}</td>
+                    <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white"><img height="100px" width="100px" :src="item?.image_url" alt="Preview" class="w-12 h-12 object-cover rounded-md" /> </td>
+                    <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ item?.proficiency_level }}</td>
+                    <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white"><input type="color" :value="item?.color"></td>
+                    <td class="px-4 py-3 space-x-2 whitespace-nowrap">
+                        <EditButton :obj="item" redirectionRoute="skills.edit"/>
+                        <DeleteConfirmationButton :obj="item" confirmRoute="skills.destroy"/>
+                    </td>
+            </template>
+        </DataTable>
     </AuthenticatedLayout>
 </template>
 
@@ -48,11 +30,9 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { BreadcrumbInterface } from '@/Core/helpers/Interfaces';
 import { Link } from '@inertiajs/vue3';
-import { ref, onMounted } from 'vue';
-import { DataTable } from 'simple-datatables';
 import DeleteConfirmationButton from '@/Components/Button/DeleteConfirmationButton.vue';
 import EditButton from '@/Components/Button/EditButton.vue';
-import ColumnName from '@/Components/Table/ColumnName.vue';
+import DataTable from '@/Components/Table/DataTable.vue';
 
 const props = defineProps({
     skills: Object as() => ISkill[] | undefined,
@@ -60,20 +40,15 @@ const props = defineProps({
     'pageTitle': String,
 });
 
-onMounted(() => {
-    new DataTable("#default-table", {
-        searchable: true,
-        sortable: true,
-        header: true,
-    });
-});
-
-const columnNames = [
-    'name',
-    'image',
-    'proficency level',
-    'color'
+const columns = [
+    { key: 'name', label: 'Name', sortable: true },
+    { key: 'image', label: 'Image', sortable: false },
+    { key: 'proficiency_level', label: 'Proficency Level', sortable: true },
+    { key: 'color', label: 'color', sortable: false },
+    { key: 'actions', label: 'Actions', sortable: false },
 ]
+
+const searchableKeys = ['name', 'proficiency_level'];
 
 interface ISkill {
     id: number,

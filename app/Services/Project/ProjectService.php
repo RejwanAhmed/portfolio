@@ -43,4 +43,12 @@ class ProjectService extends BaseModelService
         $skillIds = collect($skills)->pluck('id')->toArray();
         return $project->skills()->sync($skillIds);
     }
+
+    public function deleteProject(Project $project)
+    {
+        $project->projectImages()->delete();
+        $project->skills()->detach();
+        $project->delete();
+        return true;
+    }
 }
