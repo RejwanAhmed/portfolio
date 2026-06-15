@@ -11,9 +11,4 @@ class JobApplicationService extends BaseModelService
     {
         return JobApplication::class;
     }
-
-    public function getAllJobApplications()
-    {
-        return $this->model()::with('phases')->orderBy('id', 'DESC')->get();
-    }
 }
