@@ -11,34 +11,18 @@
         </div>
 
         <!-- Content Section -->
-        <div class="overflow-hidden bg-white shadow-md sm:rounded-lg">
-            <div class="p-6 text-gray-900">
-                <table id="default-table">
-                    <thead>
-                        <tr>
-                            <ColumnName :columnNames="columnNames"/>
-                            <th>
-                                <span class="flex items-center">
-                                    Action
-                                </span>
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr v-for="experience in experiences" :key="experience.id">
-                            <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ experience?.company_name }}</td>
-                            <td>{{ experience?.job_title }}</td>
-                            <td>{{ experience?.start_date }}</td>
-                            <td>{{ experience?.end_date }}</td>
-                            <td class = "space-x-2">
-                                <EditButton :obj="experience" redirectionRoute="experiences.edit"/>
-                                <DeleteConfirmationButton :obj="experience" confirmRoute="experiences.destroy"/>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+        <DataTable :items="experiences" :columns="columns" :search-keys="searchableKeys" class="mt-5">
+            <template #row="{ item }">
+                <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ item?.company_name }}</td>
+                    <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ item?.job_title }}</td>
+                    <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ item?.start_date }}</td>
+                    <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ item?.end_date }}</td>
+                    <td class="px-4 py-3 space-x-2 whitespace-nowrap">
+                        <EditButton :obj="item" redirectionRoute="experiences.edit"/>
+                        <DeleteConfirmationButton :obj="item" confirmRoute="experiences.destroy"/>
+                    </td>
+            </template>
+        </DataTable>
     </AuthenticatedLayout>
 </template>
 
@@ -46,11 +30,9 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { BreadcrumbInterface } from '@/Core/helpers/Interfaces';
 import { Link } from '@inertiajs/vue3';
-import { onMounted } from 'vue';
-import { DataTable } from 'simple-datatables';
 import DeleteConfirmationButton from '@/Components/Button/DeleteConfirmationButton.vue';
 import EditButton from '@/Components/Button/EditButton.vue';
-import ColumnName from '@/Components/Table/ColumnName.vue';
+import DataTable from '@/Components/Table/DataTable.vue';
 
 const props = defineProps({
     experiences: Object as() => IExperience[] | undefined,
@@ -58,20 +40,15 @@ const props = defineProps({
     'pageTitle': String,
 });
 
-onMounted(() => {
-    new DataTable("#default-table", {
-        searchable: true,
-        sortable: true,
-        header: true,
-    });
-});
-
-const columnNames = [
-    'company name',
-    'job title',
-    'start date',
-    'end date',
+const columns = [
+    { key: 'company_name', label: 'Company Name', sortable: true },
+    { key: 'job_title', label: 'Job Title', sortable: true },
+    { key: 'start_date', label: 'Start Date', sortable: true },
+    { key: 'end_date', label: 'End Date', sortable: true },
+    { key: 'actions', label: 'Actions', sortable: false },
 ]
+
+const searchableKeys = ['company_name', 'job_title', 'start_date', 'end_date'];
 
 interface IExperience {
     id: number,

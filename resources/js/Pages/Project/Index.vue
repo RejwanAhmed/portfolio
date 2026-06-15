@@ -10,55 +10,43 @@
             </Link>
         </div>
         <!-- Content Section -->
-        <div class="overflow-hidden bg-white shadow-md sm:rounded-lg">
-            <div class="p-6 text-gray-900">
-                <table id="default-table">
-                    <thead>
-                        <tr>
-                            <ColumnName :columnNames="columnNames"/>
-                            <th>
-                                <span class="flex items-center">
-                                    Action
-                                </span>
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr v-for="project in projects" :key="project.id">
-                            <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ project?.name }}</td>
-                            <td>{{ project?.description?.substring(0, 15) }}{{ project?.description?.length > 15 ? '...' : '' }}</td>
-                            <td>{{ project?.start_date }}</td>
-                            <td>{{ project?.end_date }}</td>
-                            <td>{{ project?.github_url }}</td>
-                            <td>{{ project?.live_link_url }}</td>
-                            <td class = "flex items-center space-x-2">
-                                <EditButton :obj="project" redirectionRoute="projects.edit"/>
-                                
-                                <DeleteConfirmationButton :obj="project" confirmRoute="projects.destroy"/>
-                                
-                                <ImageUploadModal 
-                                    :projectId = "project.id"
-                                    :projectName = "project.name"
-                                />
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+        <DataTable :items="projects" :columns="columns" :search-keys="searchableKeys" class="mt-5">
+            <template #row="{ item }">
+                <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ item?.name }}</td>
+                    <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ item?.description?.substring(0, 15) }}{{ item?.description?.length > 15 ? '...' : '' }}</td>
+                    <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ item?.start_date }}</td>
+                    <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ item?.end_date }}</td>
+                    <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        <a v-if="item?.github_url" :href="item.github_url" target="_blank" class="text-indigo-600 hover:underline">
+                            {{ item.github_url.substring(0, 20) }}...
+                        </a>
+                        <span v-else class="text-gray-400">—</span>
+                    </td>
+
+                    <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        <a v-if="item?.live_link_url" :href="item.live_link_url" target="_blank" class="text-indigo-600 hover:underline">
+                            {{ item.live_link_url.substring(0, 20) }}...
+                        </a>
+                        <span v-else class="text-gray-400">—</span>
+                    </td>
+                    <td class="px-4 py-3 space-x-2 whitespace-nowrap">
+                        <EditButton :obj="item" redirectionRoute="projects.edit"/>
+                        <DeleteConfirmationButton :obj="item" confirmRoute="projects.destroy"/>
+                        <ImageUploadModal :projectId = "item.id" :projectName = "item.name"/>
+                    </td>
+            </template>
+        </DataTable>
     </AuthenticatedLayout>
 </template>
 
 <script setup lang="ts">
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Link } from '@inertiajs/vue3';
-import { onMounted } from 'vue';
-import { DataTable } from 'simple-datatables';
 import DeleteConfirmationButton from '@/Components/Button/DeleteConfirmationButton.vue';
 import EditButton from '@/Components/Button/EditButton.vue';
-import ColumnName from '@/Components/Table/ColumnName.vue';
 import { BreadcrumbInterface } from '@/Core/helpers/Interfaces';
 import ImageUploadModal  from '@/Pages/Project/ImageUploadModal.vue';
+import DataTable from '@/Components/Table/DataTable.vue';
 
 const props = defineProps({
     projects: Object as() => IProject[] | undefined,
@@ -66,23 +54,17 @@ const props = defineProps({
     pageTitle: String,
 })
 
-onMounted(() => {
-    // Initialize the DataTable when the component is mounted
-    new DataTable("#default-table", {
-        searchable: true,
-        sortable: true,
-        header: true,
-    });
-});
-
-const columnNames = [
-    'name',
-    'description',
-    'start_date',
-    'end_date',
-    'Github',
-    'Live Link'
+const columns = [
+    { key: 'name', label: 'Name', sortable: true },
+    { key: 'description', label: 'Description', sortable: true },
+    { key: 'start_date', label: 'Start Date', sortable: true },
+    { key: 'end_date', label: 'End Date', sortable: true },
+    { key: 'github_url', label: 'Github', sortable: true },
+    { key: 'live_link_url', label: 'Live Link', sortable: true },
+    { key: 'actions', label: 'Actions', sortable: false },
 ]
+
+const searchableKeys = ['name', 'description', 'start_date', 'end_date'];
 
 interface IProject {
     id: number,

@@ -8,7 +8,6 @@ use App\Models\Project\Project;
 use App\Services\SkillService;
 use Diglactic\Breadcrumbs\Breadcrumbs;
 use Inertia\Inertia;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Services\Project\ProjectService;
 use Illuminate\Support\Facades\Redirect;
@@ -83,7 +82,7 @@ class ProjectController extends Controller
 
     public function destroy(Project $project)
     {
-        $isDeleted = $this->projectService->delete($project->id);
+        $isDeleted = $this->projectService->deleteProject($project);
         $status = $isDeleted ? Constants::SUCCESS : Constants::ERROR;
         $message = $isDeleted ? 'Project Deleted Successfully' : 'Project Could Not Be Deleted';
         return Redirect::route('projects.index')->with($status, $message);
