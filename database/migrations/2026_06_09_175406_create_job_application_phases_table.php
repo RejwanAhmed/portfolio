@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('job_application_id')->constrained('job_applications')->cascadeOnDelete();
             $table->string('phase_name');
             $table->dateTime('scheduled_at');
-            $table->text('notes');
+            $table->text('notes')->nullable();
             $table->enum('outcome', ['pending', 'passed', 'failed'])->default('pending');
             $table->timestamps();
         });

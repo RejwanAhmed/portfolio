@@ -22,7 +22,7 @@ class JobApplicationController extends Controller
 
     public function index()
     {
-        $jobApplications = $this->jobApplicationService->getAllJobApplications();
+        $jobApplications = $this->jobApplicationService->all();
         $breadcrumbs = Breadcrumbs::generate('job-applications');
         $responseData = [
             'jobApplications' => $jobApplications,

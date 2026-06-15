@@ -28,12 +28,17 @@
                     </span>
                 </td>
                 <td class="px-4 py-3 space-x-2 whitespace-nowrap">
+                    <PhaseButton @click="openPhaseModal(item)" />
                     <ViewButton :obj="item" redirectionRoute="job-applications.show" />
                     <EditButton :obj="item" redirectionRoute="job-applications.edit" />
                     <DeleteConfirmationButton :obj="item" confirmRoute="job-applications.destroy" />
                 </td>
             </template>
         </DataTable>
+
+        <!-- outside the table, at the bottom of template -->
+        <PhaseModal :show="phaseModal.show" :jobApplicationId="phaseModal.id" :jobApplicationTitle="phaseModal.title" @close="phaseModal.show = false"
+        />
 
     </AuthenticatedLayout>
 </template>
@@ -47,6 +52,9 @@ import EditButton from '@/Components/Button/EditButton.vue';
 import ViewButton from '@/Components/Button/ViewButton.vue';
 import DataTable from '@/Components/Table/DataTable.vue';
 import { useStatusClass } from '@/composables/useStatusClass'
+import PhaseButton from '@/Components/Button/PhaseButton.vue'
+import PhaseModal from '@/Pages/JobApplication/Modal/PhaseModal.vue'
+import { ref } from 'vue'
 
 const props = defineProps({
     jobApplications: Object as() => IJobApplication[] | undefined,
@@ -71,4 +79,10 @@ const columns = [
 ]
 
 const searchableKeys = ['company_name', 'title', 'application_date', 'status'];
+
+const phaseModal = ref({ show: false, id: null as number | null, title: '' })
+
+const openPhaseModal = (item: any) => {
+    phaseModal.value = { show: true, id: item.id, title: item.title }
+}
 </script>

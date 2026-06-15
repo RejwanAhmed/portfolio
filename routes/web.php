@@ -1,18 +1,19 @@
 <?php
 
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CvController;
 use App\Http\Controllers\EducationController;
 use App\Http\Controllers\ExperienceController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JobApplicationController;
-use Inertia\Inertia;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\SkillController;
+use App\Http\Controllers\JobApplicationPhaseController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Project\ProjectController;
 use App\Http\Controllers\Project\ProjectImageController;
-use App\Http\Controllers\ContactController;
+use App\Http\Controllers\SkillController;
 use Diglactic\Breadcrumbs\Breadcrumbs;
+use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -48,6 +49,12 @@ Route::middleware('auth')->group(function () {
         Route::patch('/{cv}/change-status', [CvController::class, 'changeStatus'])->name('changeStatus');
     });
     Route::resource('job-applications', JobApplicationController::class);
+    Route::prefix('job-applications/{jobApplication}/phases')->name('job-applications.phases.')->group(function () {
+        Route::get('/', [JobApplicationPhaseController::class, 'index'])->name('index');
+        Route::post('/', [JobApplicationPhaseController::class, 'store'])->name('store');
+        Route::put('/{phase}', [JobApplicationPhaseController::class, 'update'])->name('update');
+        Route::delete('/{phase}', [JobApplicationPhaseController::class, 'destroy'])->name('destroy');
+    });
 });
 
 require __DIR__.'/auth.php';
