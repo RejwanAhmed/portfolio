@@ -90,7 +90,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import ErrorMessage from '@/Components/Message/ErrorMessage.vue';
 import SubmitButton from '@/Components/Button/SubmitButton.vue';
 import { BreadcrumbInterface } from '@/Core/helpers/Interfaces';
-import { defineProps, ref, onMounted } from 'vue';
+import { ref, onMounted } from 'vue';
 import { useForm, router } from '@inertiajs/vue3';
 import { Field, Form, Form as VForm } from "vee-validate";
 
