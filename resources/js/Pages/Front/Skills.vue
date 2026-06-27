@@ -20,7 +20,9 @@
 </template>
 
 <script setup lang="ts">
-const props = defineProps({
-    skills: Object,
-});
+import { Skill } from '@/types/index';
+
+const props = defineProps<{
+    skills?: Skill[],
+}>();
 </script>

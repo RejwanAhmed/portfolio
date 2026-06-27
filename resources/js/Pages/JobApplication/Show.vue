@@ -8,7 +8,7 @@
                     <h2 class="text-xl font-semibold text-gray-800">{{ props.jobApplication?.title }}</h2>
                     <p class="text-sm text-gray-500 mt-1">{{ props.jobApplication?.company_name }}</p>
                 </div>
-                <span :class="useStatusClass(props.jobApplication?.status)" class="text-xs font-medium px-3 py-1 rounded-full capitalize">
+                <span :class="getStatusClass(props.jobApplication?.status)" class="text-xs font-medium px-3 py-1 rounded-full capitalize">
                     {{ props.jobApplication?.status }}
                 </span>
             </div>
@@ -78,14 +78,14 @@
 <script setup lang="ts">
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue'
 import { Link } from '@inertiajs/vue3'
-import { BreadcrumbInterface } from '@/Core/helpers/Interfaces'
-import { useStatusClass } from '@/composables/useStatusClass';
+import { JobApplication, BreadcrumbInterface } from '@/types/index'
+import { getStatusClass } from '@/Core/helpers/statusHelpers';
 
-const props = defineProps({
-    jobApplication: Object,
-    pageTitle: String,
-    breadcrumbs: Array as () => BreadcrumbInterface[]
-})
+const props = defineProps<{
+    jobApplication: JobApplication,
+    breadcrumbs: BreadcrumbInterface[],
+    pageTitle: string,
+}>();
 
 const formatDate = (date: string) => {
     if (!date) return ''

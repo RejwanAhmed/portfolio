@@ -4,6 +4,8 @@
     </button>
 </template>
 
-<script setup>
-defineEmits(['click'])
+<script setup lang="ts">
+defineEmits<{
+    click: [];
+}>();
 </script>

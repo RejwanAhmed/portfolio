@@ -8,7 +8,6 @@ use App\Services\EducationService;
 use App\Services\ExperienceService;
 use App\Services\Project\ProjectService;
 use App\Services\SkillService;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class HomeController extends Controller

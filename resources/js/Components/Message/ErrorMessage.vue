@@ -6,8 +6,8 @@
     </div>
 </template>
 
-<script setup>
-const props = defineProps({
-    errorMessage: String
-});
+<script setup lang="ts">
+const props = defineProps<{
+    errorMessage?: string,
+}>();
 </script>

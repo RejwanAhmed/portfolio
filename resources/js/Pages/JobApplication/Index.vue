@@ -23,7 +23,7 @@
                     {{ item?.application_date }}
                 </td>
                 <td class="px-4 py-3 whitespace-nowrap">
-                    <span v-if="item?.status" :class="useStatusClass(item.status)" class="text-xs font-medium px-3 py-1 rounded-full capitalize">
+                    <span v-if="item?.status" :class="getStatusClass(item.status)" class="text-xs font-medium px-3 py-1 rounded-full capitalize">
                         {{ item.status }}
                     </span>
                 </td>
@@ -45,30 +45,22 @@
 
 <script setup lang="ts">
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { BreadcrumbInterface } from '@/Core/helpers/Interfaces';
+import { JobApplication, BreadcrumbInterface, PhaseModalState } from '@/types/index';
 import { Link } from '@inertiajs/vue3';
 import DeleteConfirmationButton from '@/Components/Button/DeleteConfirmationButton.vue';
 import EditButton from '@/Components/Button/EditButton.vue';
 import ViewButton from '@/Components/Button/ViewButton.vue';
 import DataTable from '@/Components/Table/DataTable.vue';
-import { useStatusClass } from '@/composables/useStatusClass'
+import { getStatusClass } from '@/Core/helpers/statusHelpers'
 import PhaseButton from '@/Components/Button/PhaseButton.vue'
 import PhaseModal from '@/Pages/JobApplication/Modal/PhaseModal.vue'
 import { ref } from 'vue'
 
-const props = defineProps({
-    jobApplications: Object as() => IJobApplication[] | undefined,
-    breadcrumbs: Array as () => BreadcrumbInterface[],
-    'pageTitle': String,
-});
-
-interface IJobApplication {
-    id: number,
-    company_name: string,
-    title: string,
-    application_date: string,
-    status: string,
-}
+const props = defineProps<{
+    jobApplications: JobApplication[],
+    breadcrumbs: BreadcrumbInterface[],
+    pageTitle: string,
+}>();
 
 const columns = [
     { key: 'company_name', label: 'Company Name', sortable: true },
@@ -80,9 +72,9 @@ const columns = [
 
 const searchableKeys = ['company_name', 'title', 'application_date', 'status'];
 
-const phaseModal = ref({ show: false, id: null as number | null, title: '' })
+const phaseModal = ref<PhaseModalState>({ show: false, id: null, title: '' });
 
-const openPhaseModal = (item: any) => {
+const openPhaseModal = (item: JobApplication) => {
     phaseModal.value = { show: true, id: item.id, title: item.title }
 }
 </script>

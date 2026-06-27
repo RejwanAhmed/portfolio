@@ -40,27 +40,14 @@
 
 <script setup lang="ts">
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { BreadcrumbInterface } from '@/Core/helpers/Interfaces';
+import { Education, BreadcrumbInterface } from '@/types/index';
 import { Link } from '@inertiajs/vue3';
 import DeleteConfirmationButton from '@/Components/Button/DeleteConfirmationButton.vue';
 import EditButton from '@/Components/Button/EditButton.vue';
 
-const props = defineProps({
-    educations: Object as() => IEducation[] | undefined,
-    breadcrumbs: Array as () => BreadcrumbInterface[],
-    'pageTitle': String,
-});
-
-interface IEducation {
-    id: number,
-    serial_no: number,
-    title: string,
-    institution: string,
-    logo: string,
-    board: string,
-    result: string,
-    start_year: string,
-    end_year: string,
-    held_on_year: string,
-}
+const props = defineProps<{
+    educations: Education[],
+    breadcrumbs: BreadcrumbInterface[],
+    pageTitle: string,
+}>();
 </script>

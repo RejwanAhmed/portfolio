@@ -25,7 +25,9 @@
 </template>
 
 <script setup lang="ts">
-const props = defineProps({
-    educations: Object
-})
+import { Education } from '@/types/index';
+
+const props = defineProps<{
+    educations?: Education[],
+}>();
 </script>

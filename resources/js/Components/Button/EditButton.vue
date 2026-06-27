@@ -4,11 +4,12 @@
     </Link>
 </template>
 
-<script setup>
-import { defineProps } from 'vue';
+<script setup lang="ts">
 import { Link } from '@inertiajs/vue3';
-const props = defineProps({
-    obj: Object,
-    redirectionRoute: String
-});
+import { Identifiable } from '@/types/index';
+
+const props = defineProps<{
+    obj?: Identifiable,
+    redirectionRoute: string
+}>();
 </script>

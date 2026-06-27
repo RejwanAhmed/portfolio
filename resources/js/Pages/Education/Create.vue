@@ -89,16 +89,16 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import ErrorMessage from '@/Components/Message/ErrorMessage.vue';
 import SubmitButton from '@/Components/Button/SubmitButton.vue';
-import { BreadcrumbInterface } from '@/Core/helpers/Interfaces';
+import { Education, BreadcrumbInterface } from '@/types/index';
 import { ref, onMounted } from 'vue';
 import { useForm, router } from '@inertiajs/vue3';
-import { Field, Form, Form as VForm } from "vee-validate";
+import { Field, Form as VForm } from "vee-validate";
 
-const props = defineProps({
-    education: Object,
-    pageTitle: String,
-    breadcrumbs: Array as () => BreadcrumbInterface[]
-});
+const props = defineProps<{
+    education?: Education,
+    breadcrumbs: BreadcrumbInterface[],
+    pageTitle: string,
+}>();
 
 const formData = useForm({
     title: props.education?.title || '',
@@ -152,7 +152,7 @@ const submit = () => {
 
         router.post(`/educations/${props.education?.id}`,form, {
             forceFormData: true,
-            onError: (errors) => {
+            onError: (errors: any) => {
                 formData.errors = errors;
             },
         })

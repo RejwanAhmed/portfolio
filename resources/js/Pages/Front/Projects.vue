@@ -7,7 +7,7 @@
 
             <!-- Projects Grid -->
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-                <div v-for="(project, index) in projects" :key="index" @click="openModal(index)"
+                <div v-for="(project, index) in props?.projects" :key="index" @click="openModal(index)"
                     class="cursor-pointer group">
                     <div
                         class="relative overflow-hidden rounded-xl shadow-lg transition-transform group-hover:scale-105">
@@ -35,7 +35,7 @@
                         &times;
                     </button>
                     <!-- Swiper Image Slider -->
-                    <Swiper :modules="[Navigation, Pagination]" :pagination="swiperPagination" :navigation="true"
+                    <Swiper :modules="[Navigation, Pagination]" :pagination="(swiperPagination as any)" :navigation="(true as any)"
                         class="rounded-lg mb-6 mt-5">
                         <SwiperSlide v-for="(img, i) in activeProject.project_images" :key="i">
                             <img :src="img.image_url" alt="Project Image"
@@ -46,15 +46,15 @@
                     <!-- Project Details -->
                     <div class="text-white space-y-3">
                         <h2 class="text-2xl font-bold">
-                            {{ activeProject.name }}
+                            {{ activeProject?.name }}
                         </h2>
                         <p class="text-sm text-gray-400">
                             Duration:
-                            {{ formatDate(activeProject.start_date) }} –
-                            {{ formatDate(activeProject.end_date) }}
+                            {{ formatDate(activeProject?.start_date) }} –
+                            {{ formatDate(activeProject?.end_date) }}
                         </p>
                         <p class="text-gray-300">
-                            {{ activeProject.description }}
+                            {{ activeProject?.description }}
                         </p>
 
                         <div class="flex flex-wrap gap-2 mt-2">
@@ -64,11 +64,11 @@
                         </div>
 
                         <div class="space-x-4 mt-4">
-                            <a v-if="activeProject.github_url" :href="activeProject.github_url" target="_blank"
+                            <a v-if="activeProject?.github_url" :href="activeProject.github_url" target="_blank"
                                 class="text-blue-400 hover:underline">
                                 GitHub
                             </a>
-                            <a v-if="activeProject.live_link_url" :href="activeProject.live_link_url" target="_blank"
+                            <a v-if="activeProject?.live_link_url" :href="activeProject.live_link_url" target="_blank"
                                 class="text-green-400 hover:underline">
                                 Live Site
                             </a>
@@ -80,23 +80,24 @@
     </section>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, computed } from "vue";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { Navigation, Pagination } from "swiper/modules";
+import type { PaginationOptions } from 'swiper/types';
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import { Project } from '@/types/index';
 
-const props = defineProps({
-    projects: Object,
-});
+const props = defineProps<{
+    projects?: Project[]
+}>();
 
-const isModalOpen = ref(false);
-const activeIndex = ref(0);
+const isModalOpen = ref<boolean>(false);
+const activeIndex = ref<number>(0);
 
-const openModal = (index) => {
-    console.log(index);
+const openModal = (index: number) => {
     activeIndex.value = index;
     isModalOpen.value = true;
 };
@@ -105,16 +106,17 @@ const closeModal = () => {
     isModalOpen.value = false;
 };
 
-const activeProject = computed(() => props?.projects[activeIndex.value]);
+const activeProject = computed<Project | undefined>(() => props.projects?.[activeIndex.value]);
 
-const formatDate = (date) => {
+const formatDate = (date?: string) => {
+    if (!date) return '';
     return new Date(date).toLocaleDateString("en-US", {
         month: "short",
         year: "numeric",
     });
 };
 
-const swiperPagination = {
+const swiperPagination: PaginationOptions = {
     clickable: true,
     dynamicBullets: true,
 };

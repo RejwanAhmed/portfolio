@@ -2,12 +2,15 @@
     
 </template>
 
-<script setup>
+<script setup lang="ts">
 import toastr from 'toastr';
 import 'toastr/toastr.scss';
-const props = defineProps({
-    flash: Object,
-})
+import { Flash } from '@/types';
+
+const props = defineProps<{
+    flash?: Flash
+}>();
+
 if(props.flash && props.flash.success) {
     toastr.success(props.flash.success)
     props.flash.success = null;

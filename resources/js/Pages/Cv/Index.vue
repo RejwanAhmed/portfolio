@@ -59,30 +59,24 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { ref } from 'vue';
 import DeleteConfirmationButton from '@/Components/Button/DeleteConfirmationButton.vue';
-import { BreadcrumbInterface } from '@/Core/helpers/Interfaces';
+import { Cv, BreadcrumbInterface, Flash } from '@/types/index';
 import AddCvModal from '@/Pages/Cv/Modal/AddCvModal.vue';
 import { router } from '@inertiajs/vue3';
 import PdfPreviewModal from '@/Pages/Cv/Modal/PdfPreviewModal.vue';
 import { showToast } from '@/Core/helpers/toast';
+import type { Page } from '@inertiajs/core';
 
-const props = defineProps({
-    cvs: Object as () => ICv[] | undefined,
-    breadcrumbs: Array as () => BreadcrumbInterface[],
-    pageTitle: String,
-})
+const props = defineProps<{
+    cvs: Cv[],
+    breadcrumbs: BreadcrumbInterface[],
+    pageTitle: string,
+}>();
 
-const isOpenModal = ref(false);
-const showPdfPreview = ref(false);
-const selectedCvPath = ref(null);
+const isOpenModal = ref<boolean>(false);
+const showPdfPreview = ref<boolean>(false);
+const selectedCvPath = ref<string | null>(null);
 
-interface ICv {
-    id: number,
-    created_at: string,
-    status: boolean
-    path: string,
-}
-
-const openPdfPreview = (path: String) => {
+const openPdfPreview = (path: string) => {
     showPdfPreview.value = true;
     selectedCvPath.value = path;
 }
@@ -90,9 +84,10 @@ const openPdfPreview = (path: String) => {
 const toggleStatus = (id: number) => {
     router.patch(route('cvs.changeStatus', id), {}, {
         preserveScroll: true,
-        onSuccess: (page) => {
-            if ((page.props.flash as { success?: string })?.success) {
-                showToast('success', (page.props.flash as { success: string }).success);
+        onSuccess: (page: Page) => {
+            const flash = page.props.flash as Flash;
+            if (flash.success) {
+                showToast('success', flash.success);
             }
             router.reload({ only: ['cvs'] });
         },

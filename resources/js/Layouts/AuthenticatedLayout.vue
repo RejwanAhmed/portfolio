@@ -1,16 +1,15 @@
 <script setup lang="ts">
-import { ref } from 'vue';
 import Sidebar from '@/Layouts/Components/Sidebar.vue';
 import FlashMessage from '@/Components/Message/FlashMessage.vue';
 import { Head } from '@inertiajs/vue3';
 import Breadcrumb from '@/Components/Breadcrumb.vue';
-import { BreadcrumbInterface } from '@/Core/helpers/Interfaces';
+import { BreadcrumbInterface } from '@/types/index';
 
-const showingNavigationDropdown = ref(false);
-const props = defineProps({
-    pageTitle: String,
-    breadcrumbs: Array as () => BreadcrumbInterface[]
-});
+// const showingNavigationDropdown = ref(false);
+const props = defineProps<{
+    pageTitle: string,
+    breadcrumbs: BreadcrumbInterface[]
+}>();
 </script>
 
 <template>
