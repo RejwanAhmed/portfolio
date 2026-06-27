@@ -4,15 +4,15 @@
     </button>
 </template>
 
-<script setup>
-import { defineProps } from 'vue';
+<script setup lang="ts">
 import Swal from 'sweetalert2';
 import { router } from '@inertiajs/vue3';
+import { Deletable } from '@/types/index';
 
-const props = defineProps({
-    obj: Object,
-    confirmRoute: String,
-});
+const props = defineProps<{
+    obj?: Deletable,
+    confirmRoute: string,
+}>();
 
 const showDeleteConfirmation = async () => {
     const swalWithBootstrapButtons = Swal.mixin({

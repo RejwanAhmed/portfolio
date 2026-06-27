@@ -94,17 +94,17 @@ import { useForm } from '@inertiajs/vue3';
 import { Field, Form as VForm } from "vee-validate";
 import SubmitButton from '@/Components/Button/SubmitButton.vue';
 import ErrorMessage from '@/Components/Message/ErrorMessage.vue';
-import { BreadcrumbInterface } from '@/Core/helpers/Interfaces';
+import { JobApplication, BreadcrumbInterface } from '@/types/index';
 import { QuillEditor } from '@vueup/vue-quill'
 import '@vueup/vue-quill/dist/vue-quill.snow.css';
 import '@vueup/vue-quill/dist/vue-quill.bubble.css';
-import { quillOptions } from '@/composables/useQuillOptions';
+import { quillOptions } from '@/Core/constants/useQuillOptions';
 
-const props = defineProps({
-    jobApplication: Object,
-    pageTitle: String,
-    breadcrumbs: Array as () => BreadcrumbInterface[]
-})
+const props = defineProps<{
+    jobApplication?: JobApplication,
+    breadcrumbs: BreadcrumbInterface[]
+    pageTitle: string,
+}>();
 
 const formData = useForm({
     company_name: props.jobApplication?.company_name || '',

@@ -91,11 +91,14 @@ import '@vueup/vue-quill/dist/vue-quill.snow.css';
 import '@vueup/vue-quill/dist/vue-quill.bubble.css';
 import toastr from 'toastr';
 import 'toastr/toastr.scss';
-import { quillOptions } from '@/composables/useQuillOptions';
+import { quillOptions } from '@/Core/constants/useQuillOptions';
+import { User } from '@/types/index';
+import type { Errors, Page } from '@inertiajs/core';
+import { Flash } from '@/types/index';
 
-const props = defineProps({
-    user: Object,
-})
+const props = defineProps<{
+    user: User,
+}>();
 
 const formData = useForm({
     phone: props.user?.phone || '',
@@ -108,7 +111,12 @@ const formData = useForm({
     about_me_image_url: props.user?.about_me_image_url || null,
 })
 
-const imagePreview = ref({ landing: null, about: null });
+interface ImagePreview {
+    landing: string | null;
+    about: string | null;
+}
+
+const imagePreview = ref<ImagePreview>({ landing: null, about: null });
 
 onMounted(() => {
     if(props.user?.about_me_image_url) {
@@ -120,7 +128,7 @@ onMounted(() => {
     }
 }); 
 
-const previewImage = (event: Event, type) => {
+const previewImage = (event: Event, type: 'about' | 'landing') => {
     const file = (event.target as HTMLInputElement)?.files?.[0];
     if (file) {
         const reader = new FileReader();
@@ -167,15 +175,14 @@ const submit = () => {
     router.post(`/profile/other-information/${props.user?.id}`,form, {
         forceFormData: true,
         preserveScroll: true,
-        onError: (errors) => {
+        onError: (errors: Errors) => {
             formData.errors = errors;
         },
-        onSuccess: (success) => {
-            const flashMessage = success.props.flash as { success?: string };
-
-            if (flashMessage.success) {
-                toastr.success(flashMessage.success);
-                flashMessage.success = null;
+        onSuccess: (page: Page) => {
+            const flash = page.props.flash as Flash;
+            if (flash.success) {
+                toastr.success(flash.success);
+                flash.success = null;
             }
         }
     })

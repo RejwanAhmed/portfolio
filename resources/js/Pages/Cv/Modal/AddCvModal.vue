@@ -24,8 +24,12 @@
 import { useForm } from '@inertiajs/vue3';
 import ErrorMessage from '@/Components/Message/ErrorMessage.vue';
 import { showToast } from '@/Core/helpers/toast';
+import { Flash } from '@/types';
+import type { Page } from '@inertiajs/core';
 
-const emit = defineEmits(['submitSuccess']);
+const emit = defineEmits<{
+  submitSuccess: [],
+}>();
 
 const handleFileChange = (event: Event) => {
   const target = event.target as HTMLInputElement
@@ -39,11 +43,12 @@ const formData = useForm({
 
 const submit = () => {
     formData.post(route('cvs.store'), {
-      onSuccess: (page) => {
+      onSuccess: (page: Page) => {
         formData.reset();
         
-        if ((page.props.flash as { success?: string })?.success) {
-          showToast('success', (page.props.flash as { success: string }).success);
+        const flash = page.props.flash as Flash;
+        if (flash.success) {
+            showToast('success', flash.success);
         }
 
         emit('submitSuccess');

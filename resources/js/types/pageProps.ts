@@ -1,9 +1,6 @@
-export interface User {
-    id: number;
-    name: string;
-    email: string;
-    email_verified_at?: string;
-}
+
+import { User } from './user';
+import { Flash } from './flash';
 
 export type PageProps<
     T extends Record<string, unknown> = Record<string, unknown>,
@@ -11,4 +8,6 @@ export type PageProps<
     auth: {
         user: User;
     };
+    flash: Flash;
+
 };

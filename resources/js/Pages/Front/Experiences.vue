@@ -28,13 +28,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { Experience } from '@/types/index';
 
-const props = defineProps({
-    experiences: Object,
-});
+const props = defineProps<{
+    experiences?: Experience[],
+}>();
 
-const formatDate = (date) => {
+const formatDate = (date: string) => {
     return new Date(date).toLocaleDateString('en-US', {
         month: 'short',
         year: 'numeric'

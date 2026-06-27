@@ -28,17 +28,13 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import UpdatePasswordForm from './Partials/UpdatePasswordForm.vue';
 import UpdateProfileInformationForm from './Partials/UpdateProfileInformationForm.vue';
 import ProfileOtherInformation from './Partials/ProfileOtherInformation.vue';
-import { BreadcrumbInterface } from '@/Core/helpers/Interfaces';
+import { BreadcrumbInterface, User } from '@/types/index';
 
-defineProps({
-    mustVerifyEmail: {
-        type: Boolean,
-    },
-    status: {
-        type: String,
-    },
-    user: Object,
-    pageTitle: String,
-    breadcrumbs: Array as () => BreadcrumbInterface[],
-});
+defineProps<{
+    mustVerifyEmail?: boolean;
+    status?: string;
+    user?: User;
+    pageTitle: string;
+    breadcrumbs: BreadcrumbInterface[];
+}>();
 </script>

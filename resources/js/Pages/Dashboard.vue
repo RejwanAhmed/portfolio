@@ -31,12 +31,12 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue'
 import { Head, router } from '@inertiajs/vue3'
 import { Briefcase, Book, Code, FileText, Layers } from 'lucide-vue-next'
-import { BreadcrumbInterface } from '@/Core/helpers/Interfaces';
+import { BreadcrumbInterface } from '@/types/index';
 
-const props = defineProps({
-    breadcrumbs: Array as () => BreadcrumbInterface[],
-    pageTitle: String,
-})
+const props = defineProps<{
+    breadcrumbs: BreadcrumbInterface[],
+    pageTitle: string,
+}>();
 
 const cards = [
     {
@@ -76,7 +76,7 @@ const cards = [
     },
 ]
 
-const goTo = (routeName) => {
+const goTo = (routeName: string) => {
     router.visit(route(routeName))
 }
 </script>

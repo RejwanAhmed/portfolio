@@ -1,4 +1,4 @@
-export const useStatusClass = (status: string) => {
+export const getStatusClass = (status: string) => {
     const map: Record<string, string> = {
         saved:     'bg-gray-500 text-white',
         applied:   'bg-blue-500 text-white',

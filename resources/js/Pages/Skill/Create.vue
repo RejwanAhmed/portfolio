@@ -46,18 +46,18 @@
 
 <script setup lang="ts">
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head, useForm, router  } from '@inertiajs/vue3';
+import { useForm, router  } from '@inertiajs/vue3';
 import { Field, Form as VForm } from "vee-validate";
 import SubmitButton from '@/Components/Button/SubmitButton.vue';
 import ErrorMessage from '@/Components/Message/ErrorMessage.vue';
-import { BreadcrumbInterface } from '@/Core/helpers/Interfaces';
+import { Skill, BreadcrumbInterface } from '@/types/index';
 import { ref, onMounted } from 'vue';
 
-const props = defineProps({
-    skill: Object,
-    pageTitle: String,
-    breadcrumbs: Array as () => BreadcrumbInterface[]
-})
+const props = defineProps<{
+    skill?: Skill,
+    breadcrumbs: BreadcrumbInterface[],
+    pageTitle: string,
+}>();
 
 const formData = useForm({
     name: props.skill?.name || '',
@@ -85,8 +85,6 @@ const previewImage = (event: Event) => {
         formData.image_url = file; // Update formData with the file for submission
     }
 };
-
-// 
 
 const submit = () => {
     if (props.skill?.id) {

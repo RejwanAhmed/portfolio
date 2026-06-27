@@ -44,15 +44,15 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Link } from '@inertiajs/vue3';
 import DeleteConfirmationButton from '@/Components/Button/DeleteConfirmationButton.vue';
 import EditButton from '@/Components/Button/EditButton.vue';
-import { BreadcrumbInterface } from '@/Core/helpers/Interfaces';
 import ImageUploadModal  from '@/Pages/Project/ImageUploadModal.vue';
 import DataTable from '@/Components/Table/DataTable.vue';
+import { Project, BreadcrumbInterface } from '@/types/index';
 
-const props = defineProps({
-    projects: Object as() => IProject[] | undefined,
-    breadcrumbs: Array as () => BreadcrumbInterface[],
-    pageTitle: String,
-})
+const props = defineProps<{
+    projects: Project[],
+    breadcrumbs: BreadcrumbInterface[],
+    pageTitle: string,
+}>()
 
 const columns = [
     { key: 'name', label: 'Name', sortable: true },
@@ -66,13 +66,4 @@ const columns = [
 
 const searchableKeys = ['name', 'description', 'start_date', 'end_date'];
 
-interface IProject {
-    id: number,
-    name: string,
-    description: string,
-    start_date: string,
-    end_date: string,
-    github_url?: string,
-    live_link_url?: string
-}
 </script>

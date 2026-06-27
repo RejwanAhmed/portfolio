@@ -30,8 +30,9 @@
 </template>
 
 <script setup lang="ts">
-const props = defineProps({
-    aboutMe: Object,
-    skills: Object,
-});
+import { User, Skill } from '@/types/index';
+const props = defineProps<{
+    aboutMe?: User,
+    skills?: Skill[]
+}>();
 </script>

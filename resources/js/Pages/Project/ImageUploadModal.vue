@@ -47,24 +47,25 @@
 import { ref } from 'vue';
 import ErrorMessage from '@/Components/Message/ErrorMessage.vue';
 import axios from 'axios';
+import { ProjectImage } from '@/types/index';
 
-const props = defineProps({
-    projectId: Number,
-    projectName: String
-});
+const props = defineProps<{
+    projectId: number,
+    projectName: string,
+}>();
 
-const openModal = ref(false);
-const projectId = ref<number | null>(null);
-const projectName = ref<string | null>(null);
-const existingImage = ref([]);
-const selectedFile = ref(null);
+const openModal = ref<boolean>(false);
+const selectedProjectId = ref<number | null>(null);
+const selectedProjectName = ref<string | null>(null);
+const existingImage = ref<ProjectImage[]>([]);
+const selectedFile = ref<File | null>(null);
 const errorMessages = ref<string | null>(null);
 
-const deleteImage = async (imageId) => {
+const deleteImage = async (imageId: number) => {
     try {
         const response = await axios.delete(route('project.images.destroy', imageId));
         if (response.data.status == 'success') {
-            getImages(projectId.value);
+            getImages(selectedProjectId.value);
         }
     } catch (error) {
         console.log("Something went wrong. Please try again.");
@@ -73,16 +74,16 @@ const deleteImage = async (imageId) => {
 
 const uploadImage = async () => {
     try {
-        const id = String(projectId.value)
+        const id = String(selectedProjectId.value)
         let formData = new FormData();
         formData.append("image_url", selectedFile.value);
         formData.append("project_id", id);
         const response = await axios.post(route('project.images.store', id), formData);
         if (response.data.status == 'success') {
-            selectedFile.value = '';
+            selectedFile.value = null;
             const fileInput = document.querySelector('input[type="file"]') as HTMLInputElement;
             fileInput.value = ''; // Clear the file input field
-            getImages(projectId.value);
+            getImages(selectedProjectId.value);
         }
     } catch(error: any) {
         if (error.response && error.response.data.errors) {
@@ -93,11 +94,12 @@ const uploadImage = async () => {
     }
 };
 
-const handleFileChange = (event) => {
-    selectedFile.value = event.target.files[0];
+const handleFileChange = (event: Event) => {
+    const target = event.target as HTMLInputElement;
+    selectedFile.value = target.files?.[0] ?? null;
 };
 
-const getImages = async (projectId: number) => {
+const getImages = async (projectId: number | null) => {
     try {
         const response = await axios.get(route('project.images.index', projectId));
         existingImage.value = response.data.images;
@@ -108,8 +110,8 @@ const getImages = async (projectId: number) => {
 
 // Show modal and fetch images for the selected project
 const openUploadModal = (id: number, name: string) => {
-    projectId.value = id;
-    projectName.value = name;
+    selectedProjectId.value = id;
+    selectedProjectName.value = name;
     getImages(id);
     openModal.value = true;
 }

@@ -28,17 +28,17 @@
 
 <script setup lang="ts">
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { BreadcrumbInterface } from '@/Core/helpers/Interfaces';
 import { Link } from '@inertiajs/vue3';
 import DeleteConfirmationButton from '@/Components/Button/DeleteConfirmationButton.vue';
 import EditButton from '@/Components/Button/EditButton.vue';
 import DataTable from '@/Components/Table/DataTable.vue';
+import { Skill, BreadcrumbInterface } from '@/types/index';
 
-const props = defineProps({
-    skills: Object as() => ISkill[] | undefined,
-    breadcrumbs: Array as () => BreadcrumbInterface[],
-    'pageTitle': String,
-});
+const props = defineProps<{
+    skills: Skill[],
+    breadcrumbs: BreadcrumbInterface[],
+    pageTitle: string,
+}>();
 
 const columns = [
     { key: 'name', label: 'Name', sortable: true },
@@ -49,12 +49,4 @@ const columns = [
 ]
 
 const searchableKeys = ['name', 'proficiency_level'];
-
-interface ISkill {
-    id: number,
-    name: string,
-    image_url: string,
-    proficiency_level: string,
-    color: string,
-}
 </script>

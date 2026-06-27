@@ -6,11 +6,12 @@
         "strict": false,
         "jsx": "preserve",
         "lib": ["ESNext", "DOM"],
-        "types": ["vite/client"],
+        "types": ["vite/client", "node"],
         "paths": {
             "@/*": ["./resources/js/*"],
             "ziggy-js": ["./vendor/tightenco/ziggy"]
         },
+        "skipLibCheck": true, 
         "ignoreDeprecations": "5.0"
     },
     "include": [

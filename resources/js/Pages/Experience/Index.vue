@@ -28,17 +28,17 @@
 
 <script setup lang="ts">
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { BreadcrumbInterface } from '@/Core/helpers/Interfaces';
+import { Experience, BreadcrumbInterface } from '@/types/index';
 import { Link } from '@inertiajs/vue3';
 import DeleteConfirmationButton from '@/Components/Button/DeleteConfirmationButton.vue';
 import EditButton from '@/Components/Button/EditButton.vue';
 import DataTable from '@/Components/Table/DataTable.vue';
 
-const props = defineProps({
-    experiences: Object as() => IExperience[] | undefined,
-    breadcrumbs: Array as () => BreadcrumbInterface[],
-    'pageTitle': String,
-});
+const props = defineProps<{
+    experiences: Experience[],
+    breadcrumbs: BreadcrumbInterface[],
+    pageTitle: string,
+}>();
 
 const columns = [
     { key: 'company_name', label: 'Company Name', sortable: true },
@@ -49,12 +49,4 @@ const columns = [
 ]
 
 const searchableKeys = ['company_name', 'job_title', 'start_date', 'end_date'];
-
-interface IExperience {
-    id: number,
-    company_name: string,
-    job_title: string,
-    start_date: string,
-    end_date: string,
-}
 </script>

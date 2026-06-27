@@ -11,9 +11,12 @@
 </template>
 
 <script setup lang="ts">
-const props = defineProps({
-    pdfUrl: String,
-});
 
-defineEmits(['close']);
+const props = defineProps<{
+    pdfUrl: string,
+}>();
+
+defineEmits<{
+    close: [];
+}>();
 </script>

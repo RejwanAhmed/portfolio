@@ -58,16 +58,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
 import { Home, Phone, Mail, Linkedin, Github } from 'lucide-vue-next';
-const props = defineProps({
-    aboutMe: Object,
-    cv: Object,
-});
-const isOpen = ref(false);
-const toggleMenu = () => {
-    isOpen.value = !isOpen.value;
-};
+import { User, Cv } from '@/types/index';
+
+const props = defineProps<{
+    aboutMe?: User,
+    cv?: Cv
+}>();
 
 const textArray = ["Laravel || Vue || Fullstack Developer"];
 let i = 0;

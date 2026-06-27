@@ -26,10 +26,10 @@
 </template>
 
 <script setup lang="ts">
-import { BreadcrumbInterface } from '@/Core/helpers/Interfaces';
+import { BreadcrumbInterface } from '@/types/breadcrumb';
 import { Link } from '@inertiajs/vue3';
 
-const props = defineProps({
-    breadcrumbs: Array as () => BreadcrumbInterface[]
-});
+const props = defineProps<{
+    breadcrumbs: BreadcrumbInterface[]
+}>();
 </script>

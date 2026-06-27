@@ -71,22 +71,24 @@
 
 <script setup lang="ts">
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head, useForm } from '@inertiajs/vue3';
+import { useForm } from '@inertiajs/vue3';
 import { Field, Form as VForm } from "vee-validate";
 import SubmitButton from '@/Components/Button/SubmitButton.vue';
 import ErrorMessage from '@/Components/Message/ErrorMessage.vue';
-import { BreadcrumbInterface } from '@/Core/helpers/Interfaces';
+import { BreadcrumbInterface, Project, Skill } from '@/types/index';
+
 import Multiselect from 'vue-multiselect';
 import { ref } from 'vue';
 
-const props = defineProps({
-    project: Object,
-    pageTitle: String,
-    activeSkills: Object,
-    breadcrumbs: Array as () => BreadcrumbInterface[]
-})
+const props = defineProps<{
+    project?: Project,
+    pageTitle: string,
+    activeSkills?: Pick<Skill, 'id' | 'name'>[];
+    breadcrumbs: BreadcrumbInterface[];
+}>();
 
-const allSkills = ref<Array<any>>([]);
+const allSkills = ref<Pick<Skill, 'id' | 'name'>[]>([]);
+
 if (Array.isArray(props.activeSkills) && props.activeSkills.length > 0) {
     allSkills.value = props.activeSkills.map(skill => ({id: skill.id, name:skill.name}));
 }
@@ -98,7 +100,7 @@ const formData = useForm({
     end_date: props.project?.end_date || '',
     github_url: props.project?.github_url || '',
     live_link_url: props.project?.live_link_url || '',
-    skills: props.project?.skills ? allSkills.value.filter(skill => props.project?.skills.some((s: any) => s.id === skill.id)) : []
+    skills: props.project?.skills ? allSkills.value.filter(skill => props.project?.skills.some((s) => s.id === skill.id)) : []
 
 })
 
