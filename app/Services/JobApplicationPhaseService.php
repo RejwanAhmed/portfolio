@@ -22,15 +22,4 @@ class JobApplicationPhaseService extends BaseModelService
     {
         return $jobApplication->phases()->create($data);
     }
-
-    public function updatePhase(JobApplicationPhase $phase, array $data): JobApplicationPhase
-    {
-        $phase->update($data);
-        return $phase;
-    }
-
-    public function deletePhase(JobApplicationPhase $phase): void
-    {
-        $phase->delete();
-    }
 }
