@@ -116,6 +116,15 @@
                   <span class="flex-1 ms-3 whitespace-nowrap">Job Application Tracker</span>
                </Link>
             </li>
+
+            <li>
+               <Link :href="route('blogs.index')" class="flex items-center p-2 text-gray-50 rounded-lg dark:text-gray hover:text-black hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                  <svg class="w-6 h-6 text-gray-50 transition duration-75 dark:text-gray-700 group-hover:text-gray-900 dark:group-hover:text-white" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M4 4h16v2H4V4zm0 4h16v2H4V8zm0 4h10v2H4v-2zm0 4h10v2H4v-2zm12 1l-1.41-1.41L16 14.17l3.59-3.58L21 12l-5 5z"/>
+                  </svg>
+                  <span class="flex-1 ms-3 whitespace-nowrap">Blog</span>
+               </Link>
+            </li>
          </ul>
 
          <ul class="mt-auto space-y-2 font-medium">

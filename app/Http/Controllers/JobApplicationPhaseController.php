@@ -34,13 +34,13 @@ class JobApplicationPhaseController extends Controller
     public function update(UpdateJobApplicationPhaseRequest $request, JobApplication $jobApplication, JobApplicationPhase $phase): JsonResponse
     {
         $validatedData = $request->validated();
-        $phase = $this->jobApplicationPhaseService->updatePhase($phase, $validatedData);
+        $phase = $this->jobApplicationPhaseService->update($phase, $validatedData);
         return response()->json($phase);
     }
 
     public function destroy(JobApplication $jobApplication, JobApplicationPhase $phase): JsonResponse
     {
-        $this->jobApplicationPhaseService->deletePhase($phase);
+        $this->jobApplicationPhaseService->delete($phase);
         return response()->json(null, 204);
     }
 }

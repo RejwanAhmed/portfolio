@@ -1,0 +1,36 @@
+<?php
+
+namespace App\Http\Requests\Blog;
+
+use Illuminate\Foundation\Http\FormRequest;
+
+class CreateToggleRequest extends FormRequest
+{
+    /**
+     * Determine if the user is authorized to make this request.
+     */
+    public function authorize(): bool
+    {
+        return true;
+    }
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     */
+    public function rules(): array
+    {
+        return [
+            'field' => 'required|in:is_visible,is_featured'
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'field.required' => 'Field is required',
+            'field.in' => 'Field is wrong',
+        ];
+    }
+}

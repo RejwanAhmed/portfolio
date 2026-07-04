@@ -2,6 +2,7 @@
 
 // Note: Laravel will automatically resolve `Breadcrumbs::` without
 // this import. This is nice for IDE syntax and refactoring.
+use App\Models\Blog;
 use App\Models\Education;
 use App\Models\Experience;
 use App\Models\JobApplication;
@@ -160,4 +161,28 @@ Breadcrumbs::for('editJobApplication', function (BreadcrumbTrail $trail, JobAppl
 Breadcrumbs::for('viewJobApplication', function (BreadcrumbTrail $trail, JobApplication $jobApplication) {
     $trail->parent('job-application');
     $trail->push('View', route('job-applications.show', $jobApplication));
+});
+
+// Home -> Blog
+Breadcrumbs::for('blog', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push('Blog', route('blogs.index'));
+});
+
+// Home -> Blog > Blogs
+Breadcrumbs::for('blogs', function (BreadcrumbTrail $trail) {
+    $trail->parent('blog');
+    $trail->push('List', route('blogs.index'));
+});
+
+// Home > Blog > Add
+Breadcrumbs::for('addBlog', function (BreadcrumbTrail $trail) {
+    $trail->parent('blog');
+    $trail->push('Add', route('blogs.create'));
+});
+
+// Home > Blog > Edit
+Breadcrumbs::for('editBlog', function (BreadcrumbTrail $trail, Blog $blog) {
+    $trail->parent('blog');
+    $trail->push('Edit', route('blogs.edit', $blog));
 });

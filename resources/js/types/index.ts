@@ -11,3 +11,4 @@ export * from './flash';
 export * from './jobApplication';
 export * from './deletable';
 export * from './identifiable';
+export * from './blog';

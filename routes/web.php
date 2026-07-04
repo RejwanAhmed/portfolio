@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CvController;
 use App\Http\Controllers\EducationController;
@@ -55,6 +56,8 @@ Route::middleware('auth')->group(function () {
         Route::put('/{phase}', [JobApplicationPhaseController::class, 'update'])->name('update');
         Route::delete('/{phase}', [JobApplicationPhaseController::class, 'destroy'])->name('destroy');
     });
+    Route::resource('blogs', BlogController::class)->except(['show']);
+    Route::post('blogs/{blog}/toggle', [BlogController::class, 'toggle'])->name('blogs.toggle');
 });
 
 require __DIR__.'/auth.php';
