@@ -30,7 +30,7 @@
 <script setup lang="ts">
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue'
 import { Head, router } from '@inertiajs/vue3'
-import { Briefcase, Book, Code, FileText, Layers } from 'lucide-vue-next'
+import { Briefcase, Book, Code, FileText, Layers, Newspaper, ClipboardList } from 'lucide-vue-next'
 import { BreadcrumbInterface } from '@/types/index';
 
 const props = defineProps<{
@@ -73,6 +73,20 @@ const cards = [
         icon: FileText,
         color: 'bg-pink-100',
         route: 'cvs.index',
+    },
+    {
+        title: 'Job Applications',
+        description: 'Track your job applications',
+        icon: ClipboardList,
+        color: 'bg-teal-100',
+        route: 'job-applications.index',
+    },
+    {
+        title: 'Blog',
+        description: 'Manage your blog posts',
+        icon: Newspaper,
+        color: 'bg-orange-100',
+        route: 'blogs.index',
     },
 ]
 
