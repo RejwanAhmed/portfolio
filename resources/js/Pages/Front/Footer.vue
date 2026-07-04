@@ -8,7 +8,7 @@
                     <h3 class="text-3xl font-bold tracking-tight">
                         Md. <span class="text-yellow-400">Rejwan</span> Ahmed
                     </h3>
-                    <p v-html="props?.aboutMe.short_description" class="text-sm text-gray-400 leading-relaxed"></p>
+                    <p v-html="props?.aboutMe?.short_description" class="text-sm text-gray-400 leading-relaxed"></p>
                 </div>
 
                 <!-- Center: Navigation (Vertically centered) -->
@@ -26,24 +26,24 @@
                 <div class="text-center md:text-right text-sm text-gray-400 space-y-3">
                     <div class="flex items-center justify-center md:justify-end gap-2">
                         <Home class="w-4 h-4 text-yellow-400" />
-                        <span>{{ props?.aboutMe.address }}</span>
+                        <span>{{ props?.aboutMe?.address }}</span>
                     </div>
                     <div class="flex items-center justify-center md:justify-end gap-2">
                         <Phone class="w-4 h-4 text-yellow-400" />
-                        <span>{{ props?.aboutMe.phone }}</span>
+                        <span>{{ props?.aboutMe?.phone }}</span>
                     </div>
                     <div class="flex items-center justify-center md:justify-end gap-2">
                         <Mail class="w-4 h-4 text-yellow-400" />
-                        <span>{{ props?.aboutMe.email }}</span>
+                        <span>{{ props?.aboutMe?.email }}</span>
                     </div>
                     <div class="flex items-center justify-center md:justify-end gap-2">
                         <Linkedin class="w-4 h-4 text-yellow-400" />
-                        <a :href="props?.aboutMe.linked_in_url" target="_blank"
+                        <a :href="props?.aboutMe?.linked_in_url" target="_blank"
                             class="text-blue-400 hover:underline break-all"> Visit Linked In</a>
                     </div>
                     <div class="flex items-center justify-center md:justify-end gap-2">
                         <Github class="w-4 h-4 text-yellow-400" />
-                        <a :href="props?.aboutMe.github_url" target="_blank"
+                        <a :href="props?.aboutMe?.github_url" target="_blank"
                             class="text-blue-400 hover:underline break-all">Visit Ahmed Github</a>
                     </div>
                 </div>

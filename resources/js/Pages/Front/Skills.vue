@@ -1,5 +1,5 @@
 <template>
-    <section id="skill" class="bg-black text-white py-20">
+    <section v-if="props?.skills && props?.skills.length > 0" id="skill" class="bg-black text-white py-20">
         <div class="max-w-7xl mx-auto px-6">
             <h2 class="text-4xl font-bold text-yellow-400 text-center mb-12">Skills</h2>
 
