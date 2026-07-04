@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Services\BlogService;
 use App\Services\CvService;
 use App\Services\EducationService;
 use App\Services\ExperienceService;
@@ -17,14 +18,16 @@ class HomeController extends Controller
     protected ProjectService $projectService;
     protected ExperienceService $experienceService;
     protected CvService $cvService;
+    protected BlogService $blogService;
     
-    public function __construct(SkillService $skillService, EducationService $educationService, ProjectService $projectService, ExperienceService $experienceService, CvService $cvService)
+    public function __construct(SkillService $skillService, EducationService $educationService, ProjectService $projectService, ExperienceService $experienceService, CvService $cvService, BlogService $blogService)
     {
         $this->skillService = $skillService;
         $this->educationService = $educationService;
         $this->projectService = $projectService;
         $this->experienceService = $experienceService;
         $this->cvService = $cvService;
+        $this->blogService = $blogService;
     }
 
     public function index()
@@ -35,6 +38,7 @@ class HomeController extends Controller
         $projects = $this->projectService->getAllProjects();
         $experiences = $this->experienceService->all();
         $cv = $this->cvService->getActiveCv();
+        $blogs = $this->blogService->getFeaturedBlogs();
         $responseData = [
             'aboutMe' => $aboutMe,
             'skills' => $skills,
@@ -42,6 +46,8 @@ class HomeController extends Controller
             'projects' => $projects,
             'experiences' => $experiences,
             'cv' => $cv,
+            'blogs' => $blogs,
+            'mediumUrl' => 'https://medium.com/@rejwancse10',
         ];
 
         return Inertia::render('Welcome', $responseData);

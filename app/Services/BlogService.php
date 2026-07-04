@@ -12,6 +12,11 @@ class BlogService extends BaseModelService
         return Blog::class;
     }
 
+    public function getFeaturedBlogs()
+    {
+        return $this->model()::where('is_featured', true)->where('is_visible', true)->get();
+    }
+    
     public function toggle(Blog $blog, $validatedData): bool
     {
         $field = $validatedData['field'];
