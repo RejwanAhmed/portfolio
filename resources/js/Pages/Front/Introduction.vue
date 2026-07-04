@@ -3,7 +3,7 @@
         <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <!-- Left: Profile Image -->
             <div class="flex justify-center">
-                <img :src="props?.aboutMe.landing_image_url" alt="Profile"
+                <img :src="props?.aboutMe?.landing_image_url" alt="Profile"
                     class="rounded-3xl w-81 h-81 object-cover shadow-xl ring-4 ring-gray-800" />
             </div>
 
@@ -22,33 +22,33 @@
                 <ul class="space-y-3 text-base md:text-lg">
                     <li class="flex items-center gap-4">
                         <Home class="w-6 h-6 text-gray-400" />
-                        <span>{{ props?.aboutMe.address }}</span>
+                        <span>{{ props?.aboutMe?.address }}</span>
                     </li>
                     <li class="flex items-center gap-4">
                         <Phone class="w-6 h-6 text-gray-400" />
-                        <span>{{ props?.aboutMe.phone }}</span>
+                        <span>{{ props?.aboutMe?.phone }}</span>
                     </li>
                     <li class="flex items-center gap-4">
                         <Mail class="w-6 h-6 text-gray-400" />
-                        <span>{{ props?.aboutMe.email }}</span>
+                        <span>{{ props?.aboutMe?.email }}</span>
                     </li>
                     <li class="flex items-center gap-4">
                         <Linkedin class="w-6 h-6 text-gray-400" />
-                        <a :href="props?.aboutMe.linked_in_url" target="_blank"
+                        <a :href="props?.aboutMe?.linked_in_url" target="_blank"
                             class="text-blue-400 hover:underline">
-                            {{ props?.aboutMe.linked_in_url }}
+                            {{ props?.aboutMe?.linked_in_url }}
                         </a>
                     </li>
                     <li class="flex items-center gap-4">
                         <Github class="w-6 h-6 text-gray-400" />
-                        <a :href="props?.aboutMe.github_url" target="_blank" class="text-blue-400 hover:underline">
-                            {{ props?.aboutMe.github_url }}
+                        <a :href="props?.aboutMe?.github_url" target="_blank" class="text-blue-400 hover:underline">
+                            {{ props?.aboutMe?.github_url }}
                         </a>
                     </li>
                 </ul>
 
                 <div class="mt-4" v-if="props?.cv">
-                    <a :href="props?.cv.path" target="_blank" download class="bg-yellow-400 text-black font-semibold px-6 py-3 rounded-lg hover:bg-yellow-300 transition">
+                    <a :href="props?.cv?.path" target="_blank" download class="bg-yellow-400 text-black font-semibold px-6 py-3 rounded-lg hover:bg-yellow-300 transition">
                         Download CV
                     </a>
                 </div>
