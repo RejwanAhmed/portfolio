@@ -34,14 +34,15 @@ const props = defineProps<{
     experiences?: Experience[],
 }>();
 
-const formatDate = (date: string) => {
+const formatDate = (date: string | undefined) => {
+    if (!date) return '';
     return new Date(date).toLocaleDateString('en-US', {
         month: 'short',
         year: 'numeric'
     });
 };
 
-function calculateDuration(startDateStr: string, endDateStr: string): string {
+function calculateDuration(startDateStr: string, endDateStr: string | undefined): string {
     const startDate = new Date(startDateStr);
     const endDate = endDateStr ? new Date(endDateStr) : new Date();
 
@@ -52,8 +53,7 @@ function calculateDuration(startDateStr: string, endDateStr: string): string {
 
     // Swap if start > end
     if (startDate > endDate) {
-        [startDateStr, endDateStr] = [endDateStr, startDateStr];
-        return calculateDuration(startDateStr, endDateStr);
+        return calculateDuration(endDateStr ?? startDateStr, startDateStr);
     }
 
     let years = endDate.getFullYear() - startDate.getFullYear();

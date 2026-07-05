@@ -59,13 +59,13 @@ const selectedProjectId = ref<number | null>(null);
 const selectedProjectName = ref<string | null>(null);
 const existingImage = ref<ProjectImage[]>([]);
 const selectedFile = ref<File | null>(null);
-const errorMessages = ref<string | null>(null);
+const errorMessages = ref<string | undefined>(undefined);
 
 const deleteImage = async (imageId: number) => {
     try {
         const response = await axios.delete(route('project.images.destroy', imageId));
         if (response.data.status == 'success') {
-            getImages(selectedProjectId.value);
+            getImages(selectedProjectId.value ?? 0);
         }
     } catch (error) {
         console.log("Something went wrong. Please try again.");
@@ -73,10 +73,11 @@ const deleteImage = async (imageId: number) => {
 }
 
 const uploadImage = async () => {
+    if (!selectedProjectId.value) return;
     try {
         const id = String(selectedProjectId.value)
         let formData = new FormData();
-        formData.append("image_url", selectedFile.value);
+        formData.append("image_url", selectedFile.value as File);
         formData.append("project_id", id);
         const response = await axios.post(route('project.images.store', id), formData);
         if (response.data.status == 'success') {
@@ -99,7 +100,7 @@ const handleFileChange = (event: Event) => {
     selectedFile.value = target.files?.[0] ?? null;
 };
 
-const getImages = async (projectId: number | null) => {
+const getImages = async (projectId: number) => {
     try {
         const response = await axios.get(route('project.images.index', projectId));
         existingImage.value = response.data.images;

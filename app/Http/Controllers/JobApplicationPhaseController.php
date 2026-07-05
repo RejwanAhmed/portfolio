@@ -40,7 +40,7 @@ class JobApplicationPhaseController extends Controller
 
     public function destroy(JobApplication $jobApplication, JobApplicationPhase $phase): JsonResponse
     {
-        $this->jobApplicationPhaseService->delete($phase);
+        $this->jobApplicationPhaseService->delete($phase->id);
         return response()->json(null, 204);
     }
 }

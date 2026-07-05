@@ -11,7 +11,7 @@
                     class="cursor-pointer group">
                     <div
                         class="relative overflow-hidden rounded-xl shadow-lg transition-transform group-hover:scale-105">
-                        <img :src="project.project_images[0]?.image_url" alt="Project thumbnail" class="w-full h-52" />
+                        <img :src="project.project_images?.[0]?.image_url" alt="Project thumbnail" class="w-full h-52" />
                         <div
                             class="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                             <span class="text-white text-lg font-medium">View Details</span>
@@ -37,7 +37,7 @@
                     <!-- Swiper Image Slider -->
                     <Swiper :modules="[Navigation, Pagination]" :pagination="(swiperPagination as any)" :navigation="(true as any)"
                         class="rounded-lg mb-6 mt-5">
-                        <SwiperSlide v-for="(img, i) in activeProject.project_images" :key="i">
+                        <SwiperSlide v-for="(img, i) in activeProject?.project_images" :key="i">
                             <img :src="img.image_url" alt="Project Image"
                                 class="w-full h-80 rounded-xl cursor-zoom-in" />
                         </SwiperSlide>
@@ -58,7 +58,7 @@
                         </p>
 
                         <div class="flex flex-wrap gap-2 mt-2">
-                            <span v-for="(skill, index) in activeProject.skills" :key="index"
+                            <span v-for="(skill, index) in activeProject?.skills" :key="index"
                                 class="bg-gray-700 text-xs px-2 py-1 rounded" :style="{ color: skill.color }">{{
                                     skill.name }}</span>
                         </div>

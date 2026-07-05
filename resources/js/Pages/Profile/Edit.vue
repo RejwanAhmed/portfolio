@@ -33,7 +33,7 @@ import { BreadcrumbInterface, User } from '@/types/index';
 defineProps<{
     mustVerifyEmail?: boolean;
     status?: string;
-    user?: User;
+    user: User;
     pageTitle: string;
     breadcrumbs: BreadcrumbInterface[];
 }>();

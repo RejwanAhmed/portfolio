@@ -76,6 +76,7 @@ const pause = 1500; // pause before deleting
 
 function type() {
     const target = document.getElementById("typewriter");
+    if (!target) return;
 
     if (!isDeleting && j <= textArray[i].length) {
         currentText = textArray[i].substring(0, j++);
