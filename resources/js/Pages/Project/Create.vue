@@ -93,6 +93,8 @@ if (Array.isArray(props.activeSkills) && props.activeSkills.length > 0) {
     allSkills.value = props.activeSkills.map(skill => ({id: skill.id, name:skill.name}));
 }
 
+const projectSkills = props.project?.skills ?? [];
+
 const formData = useForm({
     name: props.project?.name || '',
     description: props.project?.description || '',
@@ -100,7 +102,7 @@ const formData = useForm({
     end_date: props.project?.end_date || '',
     github_url: props.project?.github_url || '',
     live_link_url: props.project?.live_link_url || '',
-    skills: props.project?.skills ? allSkills.value.filter(skill => props.project?.skills.some((s) => s.id === skill.id)) : []
+    skills: projectSkills.length ? allSkills.value.filter(skill => projectSkills.some((s) => s.id === skill.id)) : []
 
 })
 

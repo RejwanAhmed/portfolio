@@ -66,6 +66,6 @@ const initialCount = 3 as const;
 const showAll = ref<boolean>(false);
 
 const visibleBlogs = computed<Blog[]>(() =>
-    showAll.value ? props.blogs : props.blogs?.slice(0, initialCount)
+    showAll.value ? (props.blogs ?? []) : (props.blogs?.slice(0, initialCount) ?? [])
 );
 </script>

@@ -52,6 +52,7 @@ import SubmitButton from '@/Components/Button/SubmitButton.vue';
 import ErrorMessage from '@/Components/Message/ErrorMessage.vue';
 import { Skill, BreadcrumbInterface } from '@/types/index';
 import { ref, onMounted } from 'vue';
+import type { Errors } from '@inertiajs/core';
 
 const props = defineProps<{
     skill?: Skill,
@@ -101,7 +102,7 @@ const submit = () => {
 
         router.post(`/skills/${props.skill?.id}`,form, {
             forceFormData: true,
-            onError: (errors) => {
+            onError: (errors: Errors) => {
                 formData.errors = errors;
             },
         })

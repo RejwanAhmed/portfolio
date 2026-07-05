@@ -74,7 +74,7 @@ const props = defineProps<{
 
 const isOpenModal = ref<boolean>(false);
 const showPdfPreview = ref<boolean>(false);
-const selectedCvPath = ref<string | null>(null);
+const selectedCvPath = ref<string>('');
 
 const openPdfPreview = (path: string) => {
     showPdfPreview.value = true;

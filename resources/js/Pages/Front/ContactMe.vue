@@ -38,6 +38,7 @@ import ErrorMessage from "@/Components/Message/ErrorMessage.vue";
 import { Field, Form as VForm } from "vee-validate";
 import { useForm } from '@inertiajs/vue3';
 import { usePage } from '@inertiajs/vue3';
+import type { Page } from '@inertiajs/core';
 
 const form = useForm({
     name: "",
@@ -49,7 +50,7 @@ const form = useForm({
 const submit = () => {
     form.post(route('contactMe'), {
         preserveScroll: true,
-        onSuccess: (page) => {
+        onSuccess: (page: Page) => {
             form.reset();
             const flash = usePage().props.flash as { success?: string };
             if (flash?.success) {
