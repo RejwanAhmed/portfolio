@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use App\Services\BlogService;
 use App\Services\CvService;
 use App\Services\EducationService;
 use App\Services\ExperienceService;
 use App\Services\Project\ProjectService;
 use App\Services\SkillService;
+use App\Services\TemplateService;
+use App\Services\UserService;
 use Inertia\Inertia;
 
 class HomeController extends Controller
@@ -19,8 +20,10 @@ class HomeController extends Controller
     protected ExperienceService $experienceService;
     protected CvService $cvService;
     protected BlogService $blogService;
+    protected TemplateService $templateService;
+    protected UserService $userService;
     
-    public function __construct(SkillService $skillService, EducationService $educationService, ProjectService $projectService, ExperienceService $experienceService, CvService $cvService, BlogService $blogService)
+    public function __construct(SkillService $skillService, EducationService $educationService, ProjectService $projectService, ExperienceService $experienceService, CvService $cvService, BlogService $blogService, TemplateService $templateService, UserService $userService)
     {
         $this->skillService = $skillService;
         $this->educationService = $educationService;
@@ -28,11 +31,13 @@ class HomeController extends Controller
         $this->experienceService = $experienceService;
         $this->cvService = $cvService;
         $this->blogService = $blogService;
+        $this->templateService = $templateService;
+        $this->userService = $userService;
     }
 
     public function index()
     {
-        $aboutMe = User::first();
+        $aboutMe = $this->userService->first();
         $skills = $this->skillService->all('id', 'asc');
         $educations = $this->educationService->all('serial_no', 'asc');
         $projects = $this->projectService->getAllProjects();
@@ -50,6 +55,8 @@ class HomeController extends Controller
             'mediumUrl' => 'https://medium.com/@rejwancse10',
         ];
 
-        return Inertia::render('Welcome', $responseData);
+        $folder = $this->templateService->getActiveTemplateSlug();
+
+        return Inertia::render("Templates/{$folder}/Index", $responseData);
     }
 }

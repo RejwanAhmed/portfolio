@@ -8,6 +8,7 @@ use App\Models\Experience;
 use App\Models\JobApplication;
 use App\Models\Project\Project;
 use App\Models\Skill;
+use App\Models\Template;
 use Diglactic\Breadcrumbs\Breadcrumbs;
 
 // This import is also not required, and you could replace `BreadcrumbTrail $trail`
@@ -185,4 +186,28 @@ Breadcrumbs::for('addBlog', function (BreadcrumbTrail $trail) {
 Breadcrumbs::for('editBlog', function (BreadcrumbTrail $trail, Blog $blog) {
     $trail->parent('blog');
     $trail->push('Edit', route('blogs.edit', $blog));
+});
+
+// Home -> Template
+Breadcrumbs::for('template', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push('Template', route('templates.index'));
+});
+
+// Home -> Template > Templates
+Breadcrumbs::for('templates', function (BreadcrumbTrail $trail) {
+    $trail->parent('template');
+    $trail->push('List', route('templates.index'));
+});
+
+// Home > Template > Add
+Breadcrumbs::for('addTemplate', function (BreadcrumbTrail $trail) {
+    $trail->parent('template');
+    $trail->push('Add', route('templates.create'));
+});
+
+// Home > Template > Edit
+Breadcrumbs::for('editTemplate', function (BreadcrumbTrail $trail, Template $template) {
+    $trail->parent('template');
+    $trail->push('Edit', route('templates.edit', $template));
 });

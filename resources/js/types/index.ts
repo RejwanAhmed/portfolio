@@ -12,3 +12,4 @@ export * from './jobApplication';
 export * from './deletable';
 export * from './identifiable';
 export * from './blog';
+export * from './template';
