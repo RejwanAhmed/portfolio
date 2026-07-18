@@ -21,6 +21,8 @@
                         class="hover:text-yellow-400 transition">Skill</a>
                     <a href="#projects" @click.prevent="scrollToSection('projects')"
                         class="hover:text-yellow-400 transition">Projects</a>
+                    <a href="#blogs" @click.prevent="scrollToSection('blogs')"
+                        class="hover:text-yellow-400 transition">Blogs</a>
                     <a href="#contact" @click.prevent="scrollToSection('contact')"
                         class="hover:text-yellow-400 transition">Contact</a>
                 </div>
@@ -55,6 +57,8 @@
                 class="block hover:text-yellow-400 transition">Skill</a>
             <a href="#projects" @click.prevent="scrollToSection('projects')"
                 class="block hover:text-yellow-400 transition">Projects</a>
+            <a href="#blogs" @click.prevent="scrollToSection('blogs')"
+                class="block hover:text-yellow-400 transition">Blogs</a>
             <a href="#contact" @click.prevent="scrollToSection('contact')"
                 class="block hover:text-yellow-400 transition">Contact</a>
         </div>

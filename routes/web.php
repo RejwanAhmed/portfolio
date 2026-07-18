@@ -12,6 +12,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Project\ProjectController;
 use App\Http\Controllers\Project\ProjectImageController;
 use App\Http\Controllers\SkillController;
+use App\Http\Controllers\TemplateController;
 use Diglactic\Breadcrumbs\Breadcrumbs;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -58,6 +59,9 @@ Route::middleware('auth')->group(function () {
     });
     Route::resource('blogs', BlogController::class)->except(['show']);
     Route::post('blogs/{blog}/toggle', [BlogController::class, 'toggle'])->name('blogs.toggle');
+    Route::resource('templates', TemplateController::class);
+    Route::patch('templates/{template}/activate', [TemplateController::class, 'activate'])->name('templates.activate');
+    Route::get('template-preview/{slug}', [TemplateController::class, 'preview'])->name('template.preview');
 });
 
 require __DIR__.'/auth.php';
